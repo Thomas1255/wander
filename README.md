@@ -6,3 +6,5 @@ exploring destinations together.
 It is being built around shared place collections, daily itineraries, and maps.
 
 Currently in early development.
+
+See the [development guide](docs/development.md) for local setup and verification.
