@@ -10,8 +10,11 @@ trips with friends. The owner makes final product and architecture decisions.
 - Inspect the codebase, explain dependencies, and propose a small plan first.
 - Explain meaningful tradeoffs and get approval for major design or architecture
   changes. Decide routine implementation details independently.
-- Do not commit, push, deploy, or modify production resources without explicit
-  approval. Keep changes small and suggest a descriptive commit message.
+- Create descriptive checkpoint commits after completed, verified changes within
+  the approved scope. No additional commit approval is needed. Keep commits small
+  and reviewable, and report their hashes so changes can be reverted easily.
+- Get explicit approval before pushing, deploying, or modifying production
+  resources.
 - Focus on building the product and explaining implementation choices, reasoning,
   alternatives, and tradeoffs. Do not add quizzes, practice tasks, or programming
   exercises unless explicitly requested.
@@ -22,9 +25,14 @@ trips with friends. The owner makes final product and architecture decisions.
 
 - Prioritize travel usefulness, originality, accessibility, performance, and
   maintainability over feature count.
-- The eventual identity draws on editorial travel design, expressive typography,
-  destination imagery, and thoughtful visual rhythm. Phase 0 uses a temporary
-  page and makes no final visual design decisions.
+- The approved visual direction is Blue Hour: cinematic destination photography,
+  deep mineral surfaces, warm white text, apricot accents, and Manrope typography.
+  Keep practical information readable on solid surfaces and navigation consistent.
+- Keep copy direct and useful. Avoid slogans and decorative filler. Put available
+  features within easy reach; describe destinations with their location and short,
+  concrete highlights.
+- Phase 1 is a visual preview with explicitly labeled sample trips and travelers.
+  Do not imply that creation, collaboration, or persistence is implemented.
 - Use shadcn/ui as accessible component source, not the full visual identity.
 - Future destination themes should use reusable tokens with consistent navigation
   and accessibility. Do not build a theme engine before its approved phase.
