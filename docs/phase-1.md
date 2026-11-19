@@ -346,3 +346,21 @@ without scrolling back up, and return to the landing opening. On a phone width,
 open and dismiss Menu after scrolling. Follow a destination to its sample trip
 and check its heading appears below the navbar. Real-device and non-Chromium
 review remain open; the next step remains Phase 1 visual review.
+
+## Fully transparent sticky navigation
+
+The navbar remains fully transparent while scrolling on both routes. The
+previous background fill and backdrop blur are removed. Sticky positioning,
+anchor clearance, and the existing navigation ink/shadow treatments remain.
+This replaces the filled scrolling treatment described above.
+
+Changed files: `src/app/blue-hour.css`,
+`tests/e2e/visual-foundation.browser.spec.ts`, `docs/design-system.md`, and this
+review. The scrolling regression now checks that both background alpha and
+backdrop filtering stay transparent/absent after scrolling on landing and trips.
+`npm run verify` passes formatting, lint, strict TypeScript, 3 unit tests, the
+production build, and all 44 Playwright checks. Desktop and phone captures confirm
+the header stays at the viewport top with no fill or blur; no browser errors were
+recorded. Manual review: refresh `http://localhost:3000/`, scroll the page, and
+repeat on `/trips` and at a phone width. The next step remains Phase 1 visual
+review; physical-device and non-Chromium verification remain open.

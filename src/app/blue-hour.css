@@ -36,17 +36,11 @@
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgb(16 24 32 / 94%);
-  backdrop-filter: blur(12px);
-  transition: background-color var(--motion-quick);
+  background: transparent;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 85%);
 }
 .site-header-overlay {
   margin-bottom: calc(-1 * var(--header-height));
-}
-.site-header-overlay[data-scrolled="false"] {
-  background: transparent;
-  backdrop-filter: none;
-  text-shadow: 0 1px 4px rgb(0 0 0 / 85%);
 }
 body:has(.cinematic-hero[data-navigation-tone="dark"])
   .site-header-overlay[data-scrolled="false"] {

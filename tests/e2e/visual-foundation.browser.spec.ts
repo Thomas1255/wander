@@ -134,7 +134,7 @@ test("transparent landing navigation keeps trip content clear after route change
   await expect(header).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
 });
 
-test("navigation follows scrolling and returns to the transparent opening", async ({
+test("navigation follows scrolling and stays transparent", async ({
   page,
   isMobile,
 }) => {
@@ -146,7 +146,8 @@ test("navigation follows scrolling and returns to the transparent opening", asyn
     window.scrollTo({ top: element.clientHeight + 180, behavior: "instant" }),
   );
   await expect.poll(async () => (await header.boundingBox())?.y).toBe(0);
-  await expect(header).not.toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  await expect(header).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  await expect(header).toHaveCSS("backdrop-filter", "none");
   await expect(
     header.getByRole("link", { name: "Wander home" }),
   ).toBeInViewport();
@@ -177,6 +178,8 @@ test("navigation follows scrolling and returns to the transparent opening", asyn
     .toBeGreaterThan(0);
   await expect.poll(async () => (await header.boundingBox())?.y).toBe(0);
 
+  await expect(header).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  await expect(header).toHaveCSS("backdrop-filter", "none");
   await header.getByRole("link", { name: "Wander home" }).click();
   await expect(hero).toBeVisible();
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
