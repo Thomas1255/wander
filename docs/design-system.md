@@ -62,8 +62,13 @@ preview-state links expose `aria-current`; destination anchor targets get an out
   light or dark navigation text to suit its photograph; this changes only header
   ink, not the image or overall theme. The wordmark and desktop links
   share a left-aligned row, with a full-label underline for the active page and a
-  small preview label on the right. On trip routes the same header stays in normal
-  flow over the canvas so it cannot cover the content. A Radix Dialog menu on
+  small preview label on the right. Sticky positioning keeps the header at the
+  top while scrolling. After the first 16 pixels of scrolling, a translucent
+  mineral surface and light text keep it readable above any content. At the
+  landing opening, a negative bottom margin preserves the photograph's overlap;
+  trip routes keep the header's normal layout space. A shared responsive height
+  also offsets anchor scrolling so linked destinations clear the header.
+  A Radix Dialog menu on
   phones handles focus trapping,
   Escape, and returning focus to its trigger. There are no unfinished profile,
   authentication, or trip-creation controls.

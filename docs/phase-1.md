@@ -314,3 +314,35 @@ Manual review: refresh `http://localhost:3000/trips`, check the space above
 Upcoming trips and the footer, then open the phone menu and inspect its links.
 The next step remains visual review within Phase 1; physical-device and
 non-Chromium checks remain open.
+
+## Navigation that follows scrolling
+
+The header now uses sticky positioning on landing and trip routes. At the landing
+opening it still overlays the photo transparently; after 16 pixels of scrolling
+it gains a translucent mineral background, a small backdrop blur, and light text.
+This keeps navigation readable while leaving the photography's brightness alone.
+No dividers or dependencies were added.
+
+A shared 80-pixel desktop / 72-pixel phone height controls header layout, the
+landing overlap, and document scroll padding. Trip cards and destination sections
+therefore clear the navbar when reached through links. React's external-store
+hook subscribes to the scroll threshold with a passive listener and removes it
+on unmount; it only changes the rendered state when the threshold changes.
+
+Changed files: `src/components/site-header.tsx`, `src/app/globals.css`,
+`src/app/blue-hour.css`, `tests/e2e/visual-foundation.browser.spec.ts`,
+`docs/design-system.md`, and this review.
+
+`npm run verify` passes formatting, lint, strict TypeScript, 3 unit tests, the
+production build, and all 44 Playwright browser/API checks without retries.
+Regression coverage checks navigation stays at the viewport top on both routes,
+the transparent opening returns after scrolling up, mobile menu focus is restored
+while scrolled, and linked trip cards clear the navbar. The scrolled header also
+passes the basic axe scan. Desktop/phone screenshots were visually checked;
+no browser errors or horizontal overflow were recorded.
+
+Manual review: scroll down `http://localhost:3000/` and `/trips`, use the navbar
+without scrolling back up, and return to the landing opening. On a phone width,
+open and dismiss Menu after scrolling. Follow a destination to its sample trip
+and check its heading appears below the navbar. Real-device and non-Chromium
+review remain open; the next step remains Phase 1 visual review.

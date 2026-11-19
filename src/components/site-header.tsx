@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Dialog } from "radix-ui";
 
@@ -14,15 +14,30 @@ const links = [
   { href: "/trips", label: "Your trips" },
 ];
 
+function subscribeToScroll(onChange: () => void) {
+  window.addEventListener("scroll", onChange, { passive: true });
+  return () => window.removeEventListener("scroll", onChange);
+}
+
+function hasScrolled() {
+  return window.scrollY > 16;
+}
+
 export function SiteHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const scrolled = useSyncExternalStore(
+    subscribeToScroll,
+    hasScrolled,
+    () => false,
+  );
 
   return (
     <header
       className={
         pathname === "/" ? "site-header site-header-overlay" : "site-header"
       }
+      data-scrolled={scrolled}
       id="top"
     >
       <div className="page-container header-inner">

@@ -134,6 +134,56 @@ test("transparent landing navigation keeps trip content clear after route change
   await expect(header).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
 });
 
+test("navigation follows scrolling and returns to the transparent opening", async ({
+  page,
+  isMobile,
+}) => {
+  await page.goto("/");
+  const header = page.getByRole("banner");
+  const hero = page.getByRole("region", { name: "Featured destinations" });
+  await expect(header).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  await hero.evaluate((element) =>
+    window.scrollTo({ top: element.clientHeight + 180, behavior: "instant" }),
+  );
+  await expect.poll(async () => (await header.boundingBox())?.y).toBe(0);
+  await expect(header).not.toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  await expect(
+    header.getByRole("link", { name: "Wander home" }),
+  ).toBeInViewport();
+  const accessibility = await new AxeBuilder({ page })
+    .include(".site-header")
+    .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+    .analyze();
+  expect(accessibility.violations).toEqual([]);
+
+  if (isMobile) {
+    const trigger = header.getByRole("button", { name: "Open navigation" });
+    await trigger.click();
+    await page.keyboard.press("Escape");
+    await expect(trigger).toBeFocused();
+    await expect(trigger).toBeInViewport();
+    await trigger.click();
+    await page
+      .getByRole("navigation", { name: "Mobile navigation" })
+      .getByRole("link", { name: "Your trips" })
+      .click();
+  } else {
+    await header.getByRole("link", { name: "Your trips" }).click();
+  }
+  await expect(page).toHaveURL(/\/trips$/);
+  await page.evaluate(() => window.scrollTo({ top: 500, behavior: "instant" }));
+  await expect
+    .poll(() => page.evaluate(() => window.scrollY))
+    .toBeGreaterThan(0);
+  await expect.poll(async () => (await header.boundingBox())?.y).toBe(0);
+
+  await header.getByRole("link", { name: "Wander home" }).click();
+  await expect(hero).toBeVisible();
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  await expect(header).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  expect((await hero.boundingBox())?.y).toBe(0);
+});
+
 test("carousel arrows wrap and direct selection updates the destination and trip", async ({
   page,
 }) => {
@@ -321,7 +371,13 @@ test("destination cards navigate to their corresponding sample trip", async ({
   await page.goto("/");
   await page.getByRole("link", { name: "See Iceland sample trip" }).click();
   await expect(page).toHaveURL(/\/trips#iceland$/);
-  await expect(page.getByRole("article", { name: "Iceland" })).toBeInViewport();
+  const destination = page.getByRole("article", { name: "Iceland" });
+  await expect(destination).toBeInViewport();
+  const header = await page.getByRole("banner").boundingBox();
+  const target = await destination.boundingBox();
+  if (!header || !target)
+    throw new Error("The header and trip must be rendered.");
+  expect(target.y).toBeGreaterThanOrEqual(header.y + header.height);
 });
 
 test("empty and loading previews preserve navigation back to sample trips", async ({

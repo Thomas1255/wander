@@ -53,8 +53,15 @@
   --radius: 3px;
   --space-unit: 0.25rem;
   --page-gutter: clamp(24px, 5vw, 80px);
+  --header-height: 80px;
   --motion-quick: 160ms ease;
   --motion-slow: 280ms ease;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --header-height: 72px;
+  }
 }
 
 @layer base {
@@ -65,6 +72,7 @@
   html {
     @apply font-sans;
     scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-height) + 16px);
   }
   body {
     @apply bg-background text-foreground;
