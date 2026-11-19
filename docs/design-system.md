@@ -55,6 +55,8 @@ preview-state links expose `aria-current`; destination anchor targets get an out
 
 ## Patterns and composition
 
+- **Separation:** use whitespace and grouping instead of decorative divider lines.
+  Section boundaries, footer, menu items, and collection labels do not use rules.
 - **Navigation:** a transparent header overlays the landing photograph, with
   text shadows for legibility and no full-width dimming layer. Each slide declares
   light or dark navigation text to suit its photograph; this changes only header

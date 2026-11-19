@@ -31,6 +31,8 @@ trips with friends. The owner makes final product and architecture decisions.
 - Keep copy direct and useful. Avoid slogans and decorative filler. Put available
   features within easy reach; describe destinations with their location and short,
   concrete highlights.
+- Separate sections and grouped content with spacing instead of decorative divider
+  lines.
 - Phase 1 is a visual preview with explicitly labeled sample trips and travelers.
   Do not imply that creation, collaboration, or persistence is implemented.
 - Use shadcn/ui as accessible component source, not the full visual identity.

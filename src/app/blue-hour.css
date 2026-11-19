@@ -193,7 +193,6 @@ body:has(.cinematic-hero[data-navigation-tone="dark"])
   overflow-y: auto;
   background: var(--surface);
   padding: 28px;
-  border-left: 1px solid var(--border);
   box-shadow: -20px 0 80px rgb(0 0 0 / 25%);
   animation: menu-in var(--motion-slow);
 }
@@ -220,7 +219,6 @@ body:has(.cinematic-hero[data-navigation-tone="dark"])
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  border-bottom: 1px solid var(--border);
   font-size: 2rem;
   letter-spacing: -0.06em;
 }
@@ -514,7 +512,6 @@ body:has(.cinematic-hero[data-navigation-tone="dark"])
   justify-content: space-between;
   gap: 32px;
   padding-block: 32px 40px;
-  border-top: 1px solid var(--border);
 }
 .site-footer .wordmark {
   font-size: 1.35rem;
@@ -618,7 +615,6 @@ body:has(.cinematic-hero[data-navigation-tone="dark"])
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  border-top: 1px solid var(--border);
   padding-block: 26px;
 }
 .collection-title {
@@ -635,8 +631,6 @@ body:has(.cinematic-hero[data-navigation-tone="dark"])
 .collection-title > .eyebrow {
   font-size: 0.54rem;
   letter-spacing: 0.1em;
-  border-left: 1px solid var(--border);
-  padding-left: 17px;
 }
 .preview-switch {
   display: flex;
@@ -1331,8 +1325,6 @@ body:has(.cinematic-hero[data-navigation-tone="dark"])
     gap: 10px;
   }
   .collection-title > .eyebrow {
-    border-left: none;
-    padding-left: 0;
     letter-spacing: 0.08em;
   }
   .preview-switch {

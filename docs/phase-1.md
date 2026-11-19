@@ -294,3 +294,23 @@ still needs a different crop on desktop and phone. Real-device and non-Chromium
 review remain open. The next step is visual approval within Phase 1.
 
 Suggested commit: `style: brighten destination banners and match cinematic scale`.
+
+## Divider removal
+
+Removed the footer rule, the trip collection's section rule and label separator,
+and the mobile menu's item rules and panel-edge rule. Existing spacing now
+separates those areas. `AGENTS.md` and the design-system notes record the owner's
+preference for spacing instead of decorative dividers.
+
+Changed files: `src/app/blue-hour.css`, `AGENTS.md`, `docs/design-system.md`, and
+this review. No dependencies or behavior changed. Formatting and whitespace
+checks pass, the production build passes, and all 42 Playwright browser/API
+checks pass with no retries, including the existing axe and keyboard checks.
+Desktop and phone inspection covered landing/trip footers, all collection
+states, and the mobile menu. No horizontal overflow or browser errors were
+recorded. Computed styles confirm the removed rules have zero border width.
+
+Manual review: refresh `http://localhost:3000/trips`, check the space above
+Upcoming trips and the footer, then open the phone menu and inspect its links.
+The next step remains visual review within Phase 1; physical-device and
+non-Chromium checks remain open.
