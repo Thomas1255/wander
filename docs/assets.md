@@ -25,6 +25,22 @@ Font License 1.1. Its license and copyright notice are included at
 Lucide icons are supplied by the installed `lucide-react` package under its ISC
 license. The small Wander favicon is an original SVG letterform in this repo.
 
+## React Bits Infinite Menu
+
+The destination sphere adapts the official TypeScript/CSS
+[Infinite Menu](https://reactbits.dev/components/infinite-menu) source, matching
+the JavaScript source supplied by the owner. It is pinned to React Bits revision
+[`d01aa914dcbe76da8b2923ebf872b5c8b1066e4c`](https://github.com/DavidHDev/react-bits/tree/d01aa914dcbe76da8b2923ebf872b5c8b1066e4c/src/ts-default/Components/InfiniteMenu).
+The source is kept under `src/components/react-bits/`. David Haz's copyright
+notice and the full MIT + Commons Clause license are preserved in
+`public/licenses/react-bits.txt`. This is a component integrated into Wander,
+not a separate component product. No runtime package was added.
+
+Local changes strengthen tuple/index types for strict TypeScript, add direct
+selection and renderer lifecycle callbacks, preserve vertical touch scrolling,
+handle lost WebGL, and prevent interpolation of the tile's atlas ID. Wander's
+wrapper supplies reduced-motion/no-WebGL fallback, sample links, and controls.
+
 ## Reproducible photo sources
 
 - Santorini: `https://images.unsplash.com/photo-1683836145612-c5f827737bca?fm=jpg&fit=crop&q=85&w=2000`

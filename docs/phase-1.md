@@ -364,3 +364,62 @@ the header stays at the viewport top with no fill or blur; no browser errors wer
 recorded. Manual review: refresh `http://localhost:3000/`, scroll the page, and
 repeat on `/trips` and at a phone width. The next step remains Phase 1 visual
 review; physical-device and non-Chromium verification remain open.
+
+## Infinite destination menu
+
+Replaced the three staggered destination cards with the requested React Bits
+Infinite Menu. The section now has one heading, Destinations. Its introductory
+eyebrow, promotional sentences, and per-card slogans are removed. Tokyo,
+Santorini, and Iceland remain the same three sample destinations, repeated around
+the sphere; the tiles do not represent additional places or trips. The opening
+carousel and lower closing section are unchanged.
+
+The official TypeScript/CSS source matches the supplied JavaScript variant and
+is pinned and attributed in `docs/assets.md`. Its license is included locally.
+No package dependencies were added. The wrapper disables autoplay, introductory
+spinning, grayscale, and dimming, and uses Wander's existing photography and
+tokens. The selected destination, location, and sample-trip link remain visible
+below the globe; native buttons provide direct access to all three places.
+
+The globe supports dragging, arrow-key navigation, and Enter to open the selected
+sample trip. Vertical touch scrolling stays available. Reduced motion or failed
+WebGL initialization/context loss uses a still image picker, keeping selection
+and sample links available. Rendering loads near the viewport, pauses offscreen,
+and releases event listeners, observers, buffers, shaders, and textures on unmount.
+
+Visual inspection caught a source shader defect: a floating-point tile ID was
+interpolated across triangles, occasionally sampling the wrong atlas cell at a
+row boundary and speckling the Iceland photo. Flat interpolation keeps the ID
+constant, as defined by the
+[GLSL ES specification](https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf).
+A pixel regression samples the textured center of that tile and detects repeated
+edge-color pixels. The original version failed this check in desktop and
+high-density phone captures; the corrected version passes.
+
+Changed files: `src/app/page.tsx`, `src/app/blue-hour.css`,
+`src/lib/demo-trips.ts`, `tests/e2e/visual-foundation.browser.spec.ts`, and these
+design/asset/development notes. Added `src/components/destination-menu.tsx`,
+`src/components/react-bits/infinite-menu.tsx` and its CSS, and
+`public/licenses/react-bits.txt`. Removed `src/components/destination-card.tsx`
+and the obsolete card styles and fixture slogans.
+
+`npm run verify` passes formatting, lint, strict TypeScript, all 3 unit tests,
+the production build, and all 52 Playwright browser/API checks with no retries.
+Coverage includes globe initialization, direct selection, real keyboard motion,
+pointer dragging, vertical touch scrolling without navigation, reduced-motion
+fallback, unavailable WebGL, correct sample links, and the shader pixel regression.
+Basic axe checks pass without disabled rules. Production screenshots were checked
+at 1440, 768, 390, and 320 pixels, including the still picker. Enter on the globe
+opens the selected trip at each width. No browser errors, external network hosts,
+or horizontal overflow were recorded during those checks.
+
+Preview `http://localhost:3000/#destinations` (`npm run dev` if needed). Drag the
+photos, try the three destination buttons, then follow View sample trip. Tab to
+the globe and use arrow keys and Enter; Tab leaves it normally. On a phone, try
+a horizontal drag and a vertical page scroll. Enable reduced motion to inspect
+the still picker. `npm run verify` repeats the automated checks.
+
+The three photos intentionally repeat; this remains a sample-data prototype.
+The interactive treatment needs the owner's visual approval and testing on a
+physical phone, Safari, Firefox, and a screen reader. The next step remains
+visual review within Phase 1.

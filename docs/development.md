@@ -76,7 +76,9 @@ The existing development-tooling audit findings are recorded in the phase report
 - tests/api: health endpoint HTTP contracts.
 
 Pages stay server-rendered. The mobile menu uses client state and Radix's dialog
-behavior. The Next.js Tailwind/Turbopack setup is retained; the approved Blue Hour
+behavior. The destination globe has a separate client boundary; its React Bits
+renderer is dynamically loaded near the viewport. Reduced motion and unavailable
+WebGL use a still picker with the same destination controls. The Next.js Tailwind/Turbopack setup is retained; the approved Blue Hour
 visual rules are shared through CSS variables and component styles.
 
 ## Review documentation

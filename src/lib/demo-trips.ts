@@ -5,7 +5,6 @@ export type Destination = {
   locationLabel: string;
   image: string;
   imageAlt: string;
-  invitation: string;
 };
 
 export type DemoTrip = {
@@ -24,7 +23,6 @@ export const destinations = [
     locationLabel: "Japan",
     image: "/images/tokyo.jpg",
     imageAlt: "Tokyo Tower glowing above the city at dusk",
-    invitation: "Bright lights. A thousand little discoveries.",
   },
   {
     id: "santorini",
@@ -32,7 +30,6 @@ export const destinations = [
     locationLabel: "Greece",
     image: "/images/santorini.jpg",
     imageAlt: "The lit hillside of Oia looking out over the Aegean at night",
-    invitation: "Long evenings. Nowhere else to be.",
   },
   {
     id: "iceland",
@@ -40,7 +37,6 @@ export const destinations = [
     locationLabel: "South Coast",
     image: "/images/iceland.jpg",
     imageAlt: "A waterfall descending through dark Icelandic cliffs",
-    invitation: "The open road. The unexpected turn.",
   },
 ] as const satisfies readonly Destination[];
 

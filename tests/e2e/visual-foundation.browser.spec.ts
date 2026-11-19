@@ -72,7 +72,7 @@ test("the opening uses cinematic proportions and leads directly to destinations"
       .getByRole("region", { name: "Featured destinations" })
       .boundingBox();
     const destinations = await page
-      .getByRole("region", { name: "Where to next?", exact: true })
+      .getByRole("region", { name: "Destinations", exact: true })
       .boundingBox();
     if (!header || !hero || !destinations)
       throw new Error("The opening and destinations must be rendered.");
@@ -368,11 +368,13 @@ test("main navigation reaches the sample collection", async ({
   }
 });
 
-test("destination cards navigate to their corresponding sample trip", async ({
+test("destination menu selects a place and opens its corresponding sample trip", async ({
   page,
 }) => {
   await page.goto("/");
-  await page.getByRole("link", { name: "See Iceland sample trip" }).click();
+  const menu = page.getByRole("region", { name: "Destinations", exact: true });
+  await menu.getByRole("button", { name: "Iceland", exact: true }).click();
+  await menu.getByRole("link", { name: "See Iceland sample trip" }).click();
   await expect(page).toHaveURL(/\/trips#iceland$/);
   const destination = page.getByRole("article", { name: "Iceland" });
   await expect(destination).toBeInViewport();
@@ -381,6 +383,204 @@ test("destination cards navigate to their corresponding sample trip", async ({
   if (!header || !target)
     throw new Error("The header and trip must be rendered.");
   expect(target.y).toBeGreaterThanOrEqual(header.y + header.height);
+});
+
+test("destination globe loads, supports direct selection, and works with the keyboard", async ({
+  page,
+}) => {
+  await page.goto("/#destinations");
+  const section = page.getByRole("region", {
+    name: "Destinations",
+    exact: true,
+  });
+  await expect(section.getByRole("heading", { level: 2 })).toHaveText(
+    "Destinations",
+  );
+  for (const filler of [
+    "A few places to begin",
+    "Big-city nights or a slower kind of somewhere.",
+    "Three sample journeys. Plenty of possibility.",
+    "Bright lights. A thousand little discoveries.",
+  ]) {
+    await expect(page.getByText(filler, { exact: true })).toHaveCount(0);
+  }
+  const menu = section.locator(".destination-menu");
+  await expect(menu).toHaveAttribute("data-presentation", "globe");
+  await expect(menu).toHaveAttribute("data-ready", "true", { timeout: 15_000 });
+  const globe = section.getByRole("group", {
+    name: "Destination globe",
+    exact: true,
+  });
+  await expect(globe).toHaveAttribute("data-moving", "false");
+  await section.getByRole("button", { name: "Iceland", exact: true }).click();
+  await expect(globe).toHaveAttribute("data-active-index", "2");
+  await expect(globe).toHaveAttribute("data-moving", "false");
+  // Item IDs must not interpolate across a tile. The Iceland atlas cell lies
+  // on a row boundary, which exposed repeated atlas-edge pixels in the source.
+  const canvas = globe.locator("canvas");
+  const width = await canvas.evaluate((element) => element.clientWidth);
+  const capture = await canvas.screenshot();
+  const repeatedPixelFraction = await page.evaluate(
+    async ({ base64, width }) => {
+      const blob = await fetch(`data:image/png;base64,${base64}`).then(
+        (response) => response.blob(),
+      );
+      const bitmap = await createImageBitmap(blob);
+      const sample = document.createElement("canvas");
+      sample.width = sample.height = 80;
+      const context = sample.getContext("2d");
+      if (!context) throw new Error("Pixel inspection requires a 2D canvas.");
+      const scale = bitmap.width / width;
+      context.drawImage(
+        bitmap,
+        bitmap.width / 2 - 40 * scale,
+        bitmap.height / 2 - 40 * scale,
+        80 * scale,
+        80 * scale,
+        0,
+        0,
+        80,
+        80,
+      );
+      const { data } = context.getImageData(0, 0, 80, 80);
+      const colors: Record<string, number> = {};
+      for (let offset = 0; offset < data.length; offset += 4) {
+        const color = [...data.slice(offset, offset + 3)].join(",");
+        colors[color] = (colors[color] ?? 0) + 1;
+      }
+      bitmap.close();
+      return Math.max(...Object.values(colors)) / (80 * 80);
+    },
+    { base64: capture.toString("base64"), width },
+  );
+  expect(repeatedPixelFraction).toBeLessThan(0.015);
+  await globe.focus();
+  await globe.press("ArrowRight");
+  await expect(globe).toHaveAttribute("data-moving", "true");
+  await expect(globe).toHaveAttribute("data-moving", "false");
+  await expect(globe).toBeFocused();
+  // Keyboard arrows move to neighboring tiles; repeated photos may share a title.
+  await globe.press("ArrowLeft");
+  await expect(globe).toHaveAttribute("data-moving", "true");
+  await expect(globe).toHaveAttribute("data-moving", "false");
+  await section.getByRole("button", { name: "Santorini", exact: true }).focus();
+  await page.keyboard.press("Enter");
+  await expect(globe).toHaveAttribute("data-active-index", "1");
+  await expect(
+    section.getByRole("link", { name: "See Santorini sample trip" }),
+  ).toBeVisible();
+  const results = await new AxeBuilder({ page })
+    .include("#destinations")
+    .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+    .analyze();
+  expect(results.violations).toEqual([]);
+});
+
+test("destination globe responds to dragging without blocking vertical touch scrolling", async ({
+  page,
+  context,
+}) => {
+  await page.goto("/#destinations");
+  const menu = page.locator(".destination-menu");
+  await expect(menu).toHaveAttribute("data-ready", "true", { timeout: 15_000 });
+  const globe = page.getByRole("group", {
+    name: "Destination globe",
+    exact: true,
+  });
+  const canvas = globe.locator("canvas");
+  await canvas.scrollIntoViewIfNeeded();
+  const box = await canvas.boundingBox();
+  if (!box) throw new Error("The destination globe must be rendered.");
+  const x = box.x + box.width * 0.6;
+  const y = box.y + box.height * 0.4;
+  await page.mouse.move(x, y);
+  await page.mouse.down();
+  await page.mouse.move(x - 100, y + 15, { steps: 8 });
+  await expect(globe).toHaveAttribute("data-moving", "true");
+  await page.mouse.up();
+  await expect(globe).toHaveAttribute("data-moving", "false", {
+    timeout: 15_000,
+  });
+
+  const scrollBefore = await page.evaluate(() => window.scrollY);
+  const touch = await context.newCDPSession(page);
+  await touch.send("Input.dispatchTouchEvent", {
+    type: "touchStart",
+    touchPoints: [{ x, y }],
+  });
+  await touch.send("Input.dispatchTouchEvent", {
+    type: "touchMove",
+    touchPoints: [{ x, y: y - 90 }],
+  });
+  await touch.send("Input.dispatchTouchEvent", {
+    type: "touchEnd",
+    touchPoints: [],
+  });
+  await expect
+    .poll(() => page.evaluate(() => window.scrollY))
+    .toBeGreaterThan(scrollBefore);
+  await expect(page).toHaveURL(/\/#destinations$/);
+  await touch.detach();
+});
+
+test("reduced motion uses a still destination picker with working trip links", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/#destinations");
+  const section = page.getByRole("region", {
+    name: "Destinations",
+    exact: true,
+  });
+  await expect(section.locator(".destination-menu")).toHaveAttribute(
+    "data-presentation",
+    "static",
+  );
+  await expect(section.locator("canvas")).toHaveCount(0);
+  await section.getByRole("button", { name: "Iceland", exact: true }).click();
+  await expect(section.getByRole("heading", { level: 3 })).toHaveText(
+    "Iceland",
+  );
+  await section.getByRole("link", { name: "See Iceland sample trip" }).click();
+  await expect(page).toHaveURL(/\/trips#iceland$/);
+});
+
+test("destinations remain reachable when WebGL is unavailable", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    const original = HTMLCanvasElement.prototype.getContext;
+    Object.defineProperty(HTMLCanvasElement.prototype, "getContext", {
+      value(this: HTMLCanvasElement, contextId: string, ...args: unknown[]) {
+        if (contextId === "webgl2") {
+          document.documentElement.dataset.webglAttempted = "true";
+          return null;
+        }
+        return Reflect.apply(original, this, [contextId, ...args]);
+      },
+    });
+  });
+  await page.goto("/#destinations");
+  await expect(page.locator("html")).toHaveAttribute(
+    "data-webgl-attempted",
+    "true",
+  );
+  const section = page.getByRole("region", {
+    name: "Destinations",
+    exact: true,
+  });
+  await expect(section.locator(".destination-menu")).toHaveAttribute(
+    "data-presentation",
+    "static",
+  );
+  await section.getByRole("button", { name: "Santorini", exact: true }).click();
+  await expect(section.getByRole("heading", { level: 3 })).toHaveText(
+    "Santorini",
+  );
+  await section
+    .getByRole("link", { name: "See Santorini sample trip" })
+    .click();
+  await expect(page).toHaveURL(/\/trips#santorini$/);
 });
 
 test("empty and loading previews preserve navigation back to sample trips", async ({

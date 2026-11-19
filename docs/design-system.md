@@ -87,12 +87,20 @@ preview-state links expose `aria-current`; destination anchor targets get an out
   680–960 pixels in height. Phone height stays at 560 pixels.
   Responsive crops keep landmarks in view. There is no carousel dependency.
   There is no introductory filler block between those sections.
-  Lower sections retain staggered destination portraits in the DOM reading order.
+  The next section uses a simple Destinations heading and an interactive photo
+  globe instead of three staggered cards and promotional copy.
 - **Trips:** the nearest sample departure receives a large cover; two secondary
   trips use compact compositions. On phones, all three become readable vertical
   articles. Cards are read-only and have no misleading action affordances.
-- **Destinations:** links lead to the corresponding sample trip anchor. The
-  highlighted target makes that transition understandable.
+- **Destinations:** React Bits' Infinite Menu repeats the three sample photos
+  around a draggable sphere. Autoplay, intro spinning, grayscale, and dimming are
+  disabled. Location, selected destination, and a sample-trip link sit below it
+  on the canvas surface. Native destination buttons offer direct selection;
+  the focused globe supports arrow keys and Enter. Only a short drag hint is
+  shown. Reduced motion or unavailable/lost WebGL uses a still image picker with
+  the same controls and links. The renderer loads near the viewport and stops
+  rendering while offscreen. The selected trip's anchor highlight explains the
+  transition to the sample collection.
 - **Empty collection:** a real route state with a photograph, a short invitation,
   and working links to sample trips and destination inspiration. It does not
   pretend that creating a trip is implemented.

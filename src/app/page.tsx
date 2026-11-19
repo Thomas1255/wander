@@ -2,9 +2,8 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { DestinationCard } from "@/components/destination-card";
+import { DestinationMenu } from "@/components/destination-menu";
 import { DestinationCarousel } from "@/components/destination-carousel";
-import { destinations } from "@/lib/demo-trips";
 
 export default function Home() {
   return (
@@ -15,22 +14,8 @@ export default function Home() {
         id="destinations"
         aria-labelledby="destinations-heading"
       >
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">A few places to begin</p>
-            <h2 id="destinations-heading">Where to next?</h2>
-          </div>
-          <p>
-            Big-city nights or a slower kind of somewhere.
-            <br />
-            Three sample journeys. Plenty of possibility.
-          </p>
-        </div>
-        <div className="destination-grid">
-          {destinations.map((destination) => (
-            <DestinationCard key={destination.id} destination={destination} />
-          ))}
-        </div>
+        <h2 id="destinations-heading">Destinations</h2>
+        <DestinationMenu />
       </section>
       <section
         className="page-container closing-note"
