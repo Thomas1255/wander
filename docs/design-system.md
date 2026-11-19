@@ -94,7 +94,8 @@ preview-state links expose `aria-current`; destination anchor targets get an out
   articles. Cards are read-only and have no misleading action affordances.
 - **Destinations:** React Bits' Infinite Menu repeats the three sample photos
   around a draggable sphere. Autoplay, intro spinning, grayscale, and dimming are
-  disabled. Location, selected destination, and a sample-trip link sit below it
+  disabled. A thin one-pixel border marks the interactive photo area.
+  Location, selected destination, and a sample-trip link sit below it
   on the canvas surface. Native destination buttons offer direct selection;
   the focused globe supports arrow keys and Enter. Only a short drag hint is
   shown. Reduced motion or unavailable/lost WebGL uses a still image picker with

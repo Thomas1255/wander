@@ -393,6 +393,9 @@ body:has(.cinematic-hero[data-navigation-tone="dark"])
 .destination-menu-stage {
   position: relative;
   height: clamp(460px, 48vw, 620px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
 }
 .destination-menu-still {
   position: absolute;

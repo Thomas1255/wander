@@ -423,3 +423,13 @@ The three photos intentionally repeat; this remains a sample-data prototype.
 The interactive treatment needs the owner's visual approval and testing on a
 physical phone, Safari, Firefox, and a screen reader. The next step remains
 visual review within Phase 1.
+
+## Infinite Menu border
+
+Added the requested one-pixel border around the interactive photo viewport using
+the existing border color and three-pixel radius. The same frame applies to its
+still-image fallback. Updated `src/app/blue-hour.css` and the design-system notes.
+Formatting and whitespace checks, production build, and all 8 focused Infinite
+Menu browser checks pass. Desktop and phone screenshots were inspected, with no
+horizontal overflow. Preview `http://localhost:3000/#destinations` to review the
+frame; the next step remains visual review within Phase 1.
