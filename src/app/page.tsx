@@ -1,13 +1,63 @@
-import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { DestinationCard } from "@/components/destination-card";
+import { DestinationCarousel } from "@/components/destination-carousel";
+import { destinations } from "@/lib/demo-trips";
 
 export default function Home() {
   return (
-    <main className="mx-auto flex min-h-svh w-full max-w-2xl flex-col justify-center gap-4 px-6 py-12 sm:px-10">
-      <Badge variant="outline">Phase 0</Badge>
-      <h1 className="text-4xl font-semibold tracking-tight">Wander</h1>
-      <p className="text-base text-muted-foreground">
-        Project foundation. Trip planning will follow in later phases.
-      </p>
+    <main id="main-content" tabIndex={-1}>
+      <DestinationCarousel />
+      <section
+        className="page-container destinations-section"
+        id="destinations"
+        aria-labelledby="destinations-heading"
+      >
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">A few places to begin</p>
+            <h2 id="destinations-heading">Where to next?</h2>
+          </div>
+          <p>
+            Big-city nights or a slower kind of somewhere.
+            <br />
+            Three sample journeys. Plenty of possibility.
+          </p>
+        </div>
+        <div className="destination-grid">
+          {destinations.map((destination) => (
+            <DestinationCard key={destination.id} destination={destination} />
+          ))}
+        </div>
+      </section>
+      <section
+        className="page-container closing-note"
+        aria-labelledby="closing-heading"
+      >
+        <span className="closing-mark" aria-hidden="true">
+          ↗
+        </span>
+        <div>
+          <p className="eyebrow">The good part is going together</p>
+          <h2 id="closing-heading">
+            The group chat
+            <br />
+            has a horizon.
+          </h2>
+        </div>
+        <div className="closing-action">
+          <p>Take a look at what a shared trip could feel like.</p>
+          <Button asChild variant="outline">
+            <Link href="/trips">
+              Step into the preview
+              <ArrowUpRight size={18} aria-hidden="true" />
+            </Link>
+          </Button>
+          <span className="small-note">Sample trips. No account needed.</span>
+        </div>
+      </section>
     </main>
   );
 }
