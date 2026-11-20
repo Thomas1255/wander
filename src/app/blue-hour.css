@@ -439,7 +439,8 @@ body:has(.landing-horizon) {
   color: var(--hero-foreground);
 }
 .landing-horizon .destination-menu-stage {
-  border-color: rgb(255 248 237 / 55%);
+  border-color: rgb(255 248 237 / 32%);
+  border-top-color: rgb(151 180 202 / 20%);
 }
 .landing-horizon .infinite-menu:focus-visible {
   box-shadow:
@@ -488,8 +489,8 @@ body:has(.landing-horizon) .site-footer {
     ),
     linear-gradient(
       180deg,
-      #132c40 0%,
-      #294158 28%,
+      var(--horizon-entry) 0%,
+      #203b53 28%,
       #77798e 53%,
       #c69a9c 76%,
       #f4bba9 100%

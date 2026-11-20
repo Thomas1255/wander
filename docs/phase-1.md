@@ -601,3 +601,22 @@ Run npm run dev and open http://localhost:3000/. Select each destination and
 scroll through the photograph's lower fade into Destinations. Repeat at a phone
 width. The next step is visual review within Phase 1; physical-device and
 non-Chromium review remain open.
+
+## Softer Infinite Menu upper edge
+
+Matched the menu's upper gradient to the surrounding sky-entry blue and muted
+the top outline to a translucent blue. Reduced the pale border's opacity on the
+remaining edges. The menu retains its separate opaque sunset backdrop, 16-pixel
+corners, original dimensions, photo scale, and spacing.
+
+Changed src/app/blue-hour.css, docs/design-system.md, and this review. Formatting
+and the production build pass. All 16 focused Playwright checks passed without
+retries, covering the globe, direct selection, keyboard controls, touch gestures,
+fallbacks, navigation contrast, and landing accessibility. Desktop and phone
+production views were inspected; no browser errors or horizontal overflow were
+recorded. The frame is still 1296 × 620 at a 1440-pixel viewport and 342 × 420
+at a 390-pixel viewport. No new dependencies or tests were needed.
+
+Run npm run dev and open http://localhost:3000/#destinations to review the upper
+edge at desktop and phone widths. The next step remains visual review within
+Phase 1; physical-device and non-Chromium checks remain open.

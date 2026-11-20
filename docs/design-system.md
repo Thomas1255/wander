@@ -59,6 +59,11 @@ same when selecting a place. There is no destination theme engine. The selected
 place, controls, and trip action use dark ink on the warm canvas; the Destinations
 heading remains cream over blue.
 
+The menu's upper gradient shares the sky-entry blue, with a muted blue top border
+and a softer pale outline along its other edges. This keeps the rounded frame
+visible without a bright seam against the surrounding sky. Its size, corner
+radius, independent opaque backdrop, and photo scale remain unchanged.
+
 The hero fade and the start of the Destinations gradient share `--horizon-entry`.
 This avoids a charcoal band between the photograph and the blue sky. The sky's
 opacity rises gradually over its upper 24%, preserving a continuous transition
