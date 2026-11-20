@@ -498,3 +498,27 @@ navbar while scrolling and after moving to `/trips`. Repeat at a phone width and
 with reduced motion enabled. The next step is the owner's visual review within
 Phase 1. This remains a sample-data preview; physical-device, Safari, Firefox,
 and screen-reader review remain open.
+
+## Independent Infinite Menu backdrop
+
+Gave the menu's rounded frame its own opaque navy-to-dusty-rose-to-peach gradient,
+with a soft warm glow near the bottom, following the owner's cropped reference.
+The page's mountain backdrop now stays outside the frame. The canvas remains
+transparent over the menu's local background, with soft shadows behind the
+individual photos. The still-image fallback uses the same frame background and
+a matching shadow. The navigation ink boundary follows the warm part of the
+menu's new gradient.
+
+Changed `src/app/blue-hour.css`, `AGENTS.md`, `docs/design-system.md`, and this
+report. No dependencies, framework code, or new tests were needed for the CSS
+change. The production build and all 16 focused Playwright checks passed without
+retries, including globe selection, keyboard controls, dragging, vertical touch
+scrolling, reduced motion, unavailable WebGL, navigation contrast, and basic
+landing accessibility. Desktop (1440px), phone (390px), and narrow phone (320px)
+captures showed the separate menu background without horizontal overflow or
+browser errors. The globe and still-picker views were visually inspected.
+
+Run `npm run dev` and open `http://localhost:3000/#destinations` to review the
+background and photo depth. Repeat at a phone width and with reduced motion.
+The next step remains visual approval within Phase 1; physical-device and
+non-Chromium checks remain open.

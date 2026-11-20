@@ -452,7 +452,7 @@ body:has(.landing-horizon) {
 }
 .horizon-ink-boundary {
   position: absolute;
-  top: 34%;
+  top: 62%;
   width: 1px;
   height: 1px;
   pointer-events: none;
@@ -480,7 +480,24 @@ body:has(.landing-horizon) .site-footer {
   height: clamp(460px, 48vw, 620px);
   border: 1px solid var(--border);
   border-radius: 16px;
+  background:
+    radial-gradient(
+      ellipse at 40% 100%,
+      rgb(255 216 196 / 35%),
+      transparent 65%
+    ),
+    linear-gradient(
+      180deg,
+      #132c40 0%,
+      #294158 28%,
+      #77798e 53%,
+      #c69a9c 76%,
+      #f4bba9 100%
+    );
   overflow: hidden;
+}
+.destination-menu-stage .infinite-menu__canvas {
+  filter: drop-shadow(0 14px 16px rgb(14 26 39 / 32%));
 }
 .destination-menu-still {
   position: absolute;
@@ -489,6 +506,7 @@ body:has(.landing-horizon) .site-footer {
   margin-inline: auto;
   overflow: hidden;
   border-radius: var(--radius);
+  box-shadow: 0 14px 32px rgb(14 26 39 / 32%);
   pointer-events: none;
 }
 .destination-menu-still img {

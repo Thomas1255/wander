@@ -49,11 +49,14 @@ palette. These additional semantic tokens live in `globals.css`:
 | Warm control outline             | `--horizon-control` | `#826d60` |
 | Warm keyboard focus              | `--horizon-focus`   | `#214b63` |
 
-The rounded globe frame remains transparent, revealing the sky transition and a
-lightly blended local Mount Takao sunset photograph. The photograph is decorative
-and stays the same when selecting a place. It does not introduce a destination
-theme engine. The selected place, controls, and trip action use dark ink on the
-warm canvas; the Destinations heading remains cream over blue.
+The rounded globe frame has its own opaque blue-to-rose-to-peach backdrop and a
+soft glow near the bottom. Its gradient is positioned relative to the frame,
+independently of the page background. The Mount Takao landscape stays outside the
+frame. Soft photo shadows add depth; the still picker uses the same backdrop and
+shadow treatment. The photograph outside the frame is decorative and stays the
+same when selecting a place. There is no destination theme engine. The selected
+place, controls, and trip action use dark ink on the warm canvas; the Destinations
+heading remains cream over blue.
 
 ## Typography and spacing
 
