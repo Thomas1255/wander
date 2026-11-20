@@ -20,12 +20,6 @@ export function SiteFooter() {
         </summary>
         <ul>
           <li>
-            <a href="https://unsplash.com/photos/_B1RsEPiBKI">
-              Mount Takao · Luke Lawreszuk
-              <ArrowUpRight size={13} aria-hidden="true" />
-            </a>
-          </li>
-          <li>
             <a href="https://unsplash.com/photos/Y4Tn1J25qVA">
               Santorini · Jonas
               <ArrowUpRight size={13} aria-hidden="true" />

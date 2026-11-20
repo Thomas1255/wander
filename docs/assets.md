@@ -2,7 +2,8 @@
 
 The destination photographs and sunset backdrop are stored in `public/images/`, so the
 application and automated tests do not depend on a remote image host at runtime.
-These are manually selected assets, not a live places or image API integration.
+The destination photos are manually selected, not a live places or image API
+integration. The current decorative sky illustration is documented below.
 
 | Asset                    | Photographer    | Original source                                                                                                                |
 | ------------------------ | --------------- | ------------------------------------------------------------------------------------------------------------------------------ |
@@ -13,17 +14,15 @@ These are manually selected assets, not a live places or image API integration.
 
 Each source page identifies the image as free to use under the
 [Unsplash License](https://unsplash.com/license), checked during Phase 1. The
-application footer links to each photographer's source image. Photos were
+application footer links to each active destination photographer's source image. Photos were
 downloaded as resized JPEGs and are cropped/scrimmed in the interface; Next.js
 serves responsive optimized versions. Do not treat the photos as project-owned
 work or redistribute them as a competing photo collection.
 
-The Mount Takao image's source and free Unsplash license were checked on November
-20, 2026. Its resized 1800-pixel JPEG is a decorative backdrop in the landing
-page's sunset transition, softened with a CSS mask and soft-light blending. It is not an
-additional destination or a photo that changes with the selected globe tile.
-Next.js loads the decorative image lazily and serves responsive optimized sizes;
-the CSS color transition remains when images are unavailable.
+The Mount Takao image was an earlier sunset-background prototype. Its source and
+free Unsplash license were checked on November 20, 2026. It remains in the asset
+inventory for that checkpoint's history; the current page uses the illustration
+below and no longer credits Mount Takao as its visible backdrop.
 
 Manrope Variable is supplied by `@fontsource-variable/manrope` under the SIL Open
 Font License 1.1. Its license and copyright notice are included at
@@ -55,3 +54,24 @@ wrapper supplies reduced-motion/no-WebGL fallback, sample links, and controls.
 - Tokyo: `https://images.unsplash.com/photo-1513407030348-c983a97b98d8?fm=jpg&fit=crop&q=85&w=1400`
 - Iceland: `https://images.unsplash.com/photo-1570290887796-27624be22a60?fm=jpg&fit=crop&q=85&w=1400`
 - Mount Takao: `https://images.unsplash.com/photo-1764702435754-f221f6bfbbb2?fm=jpg&fit=crop&q=80&w=1800`
+
+## Decorative dusk illustration
+
+`public/images/fuji-dusk-illustration.webp` is an AI-generated decorative
+illustration created on November 20, 2026 with the built-in image generation tool.
+The owner's attached design supplied the color, atmosphere, and background
+composition reference. It is not a documentary photograph or another destination.
+The WebP is 1754 × 897 pixels, approximately 39 KB, converted from the selected
+generated output with Sharp. Next.js loads responsive optimized versions lazily.
+The illustration stays outside the Infinite Menu's opaque backdrop. No generation
+service, credentials, or user-facing AI feature was added to the app.
+
+Generation prompt:
+
+```text
+Use case: photorealistic-natural.
+Asset type: original decorative background illustration for a travel website, not a UI mockup.
+Reference: the owner's supplied Wander design, for background composition and atmosphere only.
+Create only its sky and mountain backdrop: deep midnight mineral blue at the top, softly textured blue clouds transitioning through dusty lavender and rose, a glowing pale peach horizon, low hazy layered pink mountain ridges along the bottom edge, and a small snow-capped Mount Fuji silhouette near the far right at the bottom. Most of the image is quiet sky. Keep the mountains within the bottom 15%, with the peak around 86% down. Preserve the photographic editorial atmosphere. Wide landscape, approximately 2:1, high resolution.
+Remove all interface, rounded frames, floating travel photographs, Tokyo labels, and buttons; fill those areas naturally with sky. No text, logos, people, buildings, border, or watermark. This is an original decorative illustration based on the reference, not a screenshot or an authentic destination photograph.
+```

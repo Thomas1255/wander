@@ -32,6 +32,9 @@ trips with friends. The owner makes final product and architecture decisions.
   sunset horizon. The Infinite Menu has its own opaque blue-to-rose backdrop
   within its rounded frame; landscape imagery stays outside the frame.
   Use dark ink on warm surfaces; keep the navbar transparent.
+- Treat visual references as guidance for colors, atmosphere, and surface design.
+  Preserve existing menu, photo, navigation, and layout scaling unless the owner
+  explicitly asks to change those dimensions.
 - Keep copy direct and useful. Avoid slogans and decorative filler. Put available
   features within easy reach; describe destinations with their location and short,
   concrete highlights.

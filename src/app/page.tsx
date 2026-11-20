@@ -13,7 +13,7 @@ export default function Home() {
       <div className="landing-horizon">
         <div className="horizon-landscape" aria-hidden="true">
           <Image
-            src="/images/mount-takao-sunset.jpg"
+            src="/images/fuji-dusk-illustration.webp"
             alt=""
             fill
             sizes="100vw"

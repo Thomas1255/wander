@@ -51,12 +51,19 @@ palette. These additional semantic tokens live in `globals.css`:
 
 The rounded globe frame has its own opaque blue-to-rose-to-peach backdrop and a
 soft glow near the bottom. Its gradient is positioned relative to the frame,
-independently of the page background. The Mount Takao landscape stays outside the
+independently of the page background. The illustrated Fuji horizon stays outside the
 frame. Soft photo shadows add depth; the still picker uses the same backdrop and
 shadow treatment. The photograph outside the frame is decorative and stays the
 same when selecting a place. There is no destination theme engine. The selected
 place, controls, and trip action use dark ink on the warm canvas; the Destinations
 heading remains cream over blue.
+
+The surrounding sky is a decorative generated illustration, documented in
+`docs/assets.md`. Its clouds, peach light, and layered mountains remain visible
+without low-opacity soft-light blending. The owner's references guide atmosphere
+and surface design; the existing menu, photo, heading, and navigation scale stays
+unchanged. Desktop frame height remains 460–620 pixels and the phone frame is
+420 pixels tall.
 
 ## Typography and spacing
 

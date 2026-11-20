@@ -522,3 +522,37 @@ Run `npm run dev` and open `http://localhost:3000/#destinations` to review the
 background and photo depth. Repeat at a phone width and with reduced motion.
 The next step remains visual approval within Phase 1; physical-device and
 non-Chromium checks remain open.
+
+## Reference-inspired sky and mountain detail
+
+Replaced the faint Mount Takao backdrop with a decorative dusk illustration
+inspired by the supplied design: textured blue clouds, rose and peach light,
+layered ridges, and a small Fuji silhouette near the right horizon. Its absolute
+background layer fills the surrounding Destinations scene. The Infinite Menu
+keeps its independent opaque backdrop and shadows.
+
+The existing frame dimensions, photo sizing, globe configuration, typography,
+navigation sizing, and spacing are preserved. Desktop frame height remains
+460–620 pixels and the phone frame remains 420 pixels tall. No dependencies or
+runtime features were added. The new image is approximately 39 KB and loads
+lazily through Next.js; provenance and the generation prompt are in
+`docs/assets.md`. It is an illustration, not a documentary photograph.
+
+Changed `src/app/page.tsx`, the decorative-background rules in
+`src/app/blue-hour.css`, and the obsolete backdrop credit in
+`src/components/site-footer.tsx`. Added
+`public/images/fuji-dusk-illustration.webp`. Updated `AGENTS.md`,
+`docs/assets.md`, `docs/design-system.md`, and this review.
+
+Final `npm run verify` passed formatting, lint, strict TypeScript, all 3 unit
+tests, the production build, and all 54 browser/API checks without retries.
+Production captures confirmed the original desktop frame (1296 × 620 at a
+1440-pixel viewport) and phone frame (342 × 420 at 390 pixels; 272 × 420 at
+320 pixels). No browser errors or horizontal overflow were recorded. The globe
+configuration, shared tokens, and existing tests match the preceding checkpoint.
+
+Manual review: run `npm run dev` and open
+`http://localhost:3000/#destinations`. Check the sky and mountain detail outside
+the original-size menu, select destinations, and repeat at a phone width and
+with reduced motion. The next step remains visual review within Phase 1;
+physical-device and non-Chromium checks remain open.
