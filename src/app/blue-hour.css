@@ -586,64 +586,10 @@ body:has(.landing-horizon) .site-footer {
     margin-top: 12px;
   }
 }
-.closing-note {
-  padding-block: 64px 80px;
-  display: grid;
-  grid-template-columns: 0.45fr 1.2fr 1fr;
-  gap: 48px;
-  align-items: center;
-}
-.closing-mark {
-  color: var(--primary);
-  font-size: 6rem;
-  font-weight: 300;
-  line-height: 1;
-}
-.closing-note h2 {
-  font-size: clamp(2rem, 3.8vw, 3.5rem);
-  line-height: 1.18;
-  font-weight: 500;
-  letter-spacing: -0.06em;
-  margin-top: 17px;
-}
-.closing-action {
-  justify-self: end;
-  max-width: 300px;
-  display: flex;
-  align-items: start;
-  flex-direction: column;
-}
-.closing-action > p {
-  font-size: 0.875rem;
-  line-height: 1.8;
-  color: var(--muted-foreground);
-  margin-bottom: 22px;
-}
-.small-note {
-  color: var(--muted-foreground);
-  font-size: 0.65rem;
-  margin-top: 15px;
-}
 .site-footer {
   display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 32px;
-  padding-block: 32px 40px;
-}
-.site-footer .wordmark {
-  font-size: 1.35rem;
-}
-.site-footer p {
-  font-size: 0.65rem;
-  color: var(--muted-foreground);
-  margin-top: 10px;
-}
-.footer-note {
-  color: var(--muted-foreground);
-  font-size: 0.65rem;
-  line-height: 1.8;
-  margin-top: 8px;
+  justify-content: flex-end;
+  padding-block: 0 24px;
 }
 .photo-credits {
   font-size: 0.65rem;
@@ -1093,12 +1039,6 @@ body:has(.landing-horizon) .site-footer {
   .trip-card-featured .trip-duration {
     margin-left: 0;
   }
-  .closing-note {
-    gap: 32px;
-  }
-  .footer-note {
-    max-width: 200px;
-  }
 }
 @media (max-width: 767px) {
   .header-inner {
@@ -1166,44 +1106,8 @@ body:has(.landing-horizon) .site-footer {
   .destinations-section {
     padding-block: 45px 50px;
   }
-  .closing-note {
-    grid-template-columns: 1fr 1fr;
-    gap: 26px;
-    padding-block: 44px 55px;
-  }
-  .closing-mark {
-    display: none;
-  }
-  .closing-note h2 {
-    font-size: 2rem;
-  }
-  .closing-action > p {
-    font-size: 0.875rem;
-  }
-  .closing-action .button {
-    gap: 12px;
-    font-size: 0.7rem;
-    padding-inline: 14px;
-  }
-  .small-note {
-    font-size: 0.6rem;
-  }
-  .site-footer {
-    flex-wrap: wrap;
-    padding-block: 30px;
-    gap: 20px;
-  }
-  .footer-note {
-    order: 3;
-    max-width: unset;
-    width: 100%;
-    font-size: 0.6rem;
-  }
   .photo-credits {
     min-width: 155px;
-  }
-  .site-footer p {
-    font-size: 0.6rem;
   }
   .trips-page {
     padding-top: 34px;
@@ -1329,24 +1233,6 @@ body:has(.landing-horizon) .site-footer {
   }
   .mobile-menu-trigger {
     font-size: 0.8rem;
-  }
-  .closing-note {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-  .closing-note h2 {
-    font-size: 2.4rem;
-  }
-  .closing-action {
-    justify-self: start;
-    max-width: 100%;
-  }
-  .closing-action > p {
-    font-size: 0.875rem;
-  }
-  .closing-action .button {
-    font-size: 0.75rem;
-    padding-inline: 20px;
   }
   .trips-heading {
     flex-direction: column;

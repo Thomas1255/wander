@@ -191,6 +191,11 @@ test("the landing horizon keeps controls readable and resets navigation on trip 
   page,
   isMobile,
 }) => {
+  // A short viewport lets the warm region reach the header on the shorter page.
+  await page.setViewportSize({
+    width: page.viewportSize()?.width ?? 1280,
+    height: isMobile ? 400 : 480,
+  });
   await page.goto("/#destinations");
   const header = page.getByRole("banner");
   const wordmark = header.getByRole("link", { name: "Wander home" });

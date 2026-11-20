@@ -556,3 +556,26 @@ Manual review: run `npm run dev` and open
 the original-size menu, select destinations, and repeat at a phone width and
 with reduced motion. The next step remains visual review within Phase 1;
 physical-device and non-Chromium checks remain open.
+
+## Removed closing filler
+
+Removed the closing slogan, decorative arrow, repeated sample-trip button, footer
+taglines, and duplicate footer wordmark. The landing page ends after Destinations
+with a compact photography-credit disclosure. Removed the unused closing/footer
+copy styles and their responsive overrides. Menu and photo scaling are unchanged.
+
+Changed src/app/page.tsx, src/components/site-footer.tsx, src/app/blue-hour.css,
+docs/design-system.md, and this review. The existing navigation-ink regression in
+tests/e2e/visual-foundation.browser.spec.ts now uses a shorter viewport so it can
+reach the warm navigation boundary on the shorter document; its assertions remain.
+No new dependencies or tests were added.
+
+The final npm run verify passed formatting, lint, strict TypeScript, all 3 unit
+tests, the production build, and all 54 Playwright browser/API checks without
+retries. Desktop and phone production views were inspected. The retained credits
+open with the keyboard, and no browser errors or horizontal overflow were recorded.
+
+Run npm run dev, open http://localhost:3000/, and scroll to the bottom. Confirm
+the filler is gone and Photography expands to the source links. Repeat at a phone
+width. The next step remains visual review within Phase 1; physical-device and
+non-Chromium checks remain open.

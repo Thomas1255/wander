@@ -36,8 +36,8 @@ preview-state links expose `aria-current`; destination anchor targets get an out
 
 The landing page's Destinations section now transitions from Blue Hour into a
 peach sunset horizon, following the owner's reference. The gradient is aligned
-with the globe's responsive height and continues through the lower landing page
-and footer. The opening carousel and trip collection retain their Blue Hour
+with the globe's responsive height and continues through the destination details
+and compact photography-credit footer. The opening carousel and trip collection retain their Blue Hour
 palette. These additional semantic tokens live in `globals.css`:
 
 | Role                             | Token               | Value     |
@@ -88,6 +88,9 @@ unchanged. Desktop frame height remains 460–620 pixels and the phone frame is
 
 - **Separation:** use whitespace and grouping instead of decorative divider lines.
   Section boundaries, footer, menu items, and collection labels do not use rules.
+- **Page ending:** the landing page ends after the destination picker. The footer
+  contains only the expandable photography credits; closing slogans, the repeated
+  preview action, and duplicate branding have been removed.
 - **Navigation:** a transparent header overlays the landing photograph, with
   text shadows for legibility and no full-width dimming layer. Each slide declares
   light or dark navigation text to suit its photograph; this changes only header
