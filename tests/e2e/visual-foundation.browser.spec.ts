@@ -187,6 +187,34 @@ test("navigation follows scrolling and stays transparent", async ({
   expect((await hero.boundingBox())?.y).toBe(0);
 });
 
+test("navigation ink changes from the night photo to the light hero fade", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const header = page.getByRole("banner");
+  const wordmark = header.getByRole("link", { name: "Wander home" });
+  const hero = page.getByRole("region", { name: "Featured destinations" });
+  await hero.getByRole("button", { name: "Greece", exact: true }).click();
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  const canvasInk = await page
+    .getByRole("main")
+    .evaluate((element) => getComputedStyle(element).color);
+  const openingInk = await wordmark.evaluate(
+    (element) => getComputedStyle(element).color,
+  );
+  expect(openingInk).not.toBe(canvasInk);
+
+  await hero.evaluate((element) =>
+    window.scrollTo({ top: element.clientHeight * 0.35, behavior: "instant" }),
+  );
+  await expect(wordmark).toHaveCSS("color", canvasInk);
+  await expect(header).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  await expect(header).toHaveCSS("backdrop-filter", "none");
+
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  await expect(wordmark).toHaveCSS("color", openingInk);
+});
+
 test("carousel arrows wrap and direct selection updates the destination and trip", async ({
   page,
 }) => {
