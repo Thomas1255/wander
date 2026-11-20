@@ -25,10 +25,8 @@ trips with friends. The owner makes final product and architecture decisions.
 
 - Prioritize travel usefulness, originality, accessibility, performance, and
   maintainability over feature count.
-- The owner approved a Paprika palette trial within Phase 1: peach and cream
-  surfaces, espresso text, and tomato actions. Keep the cinematic photography,
-  Manrope typography, and transparent sticky navigation from Blue Hour. Save the
-  trial in a separate checkpoint so its colors can be reverted after visual review.
+- The approved visual direction is Blue Hour: cinematic destination photography,
+  deep mineral surfaces, warm white text, apricot accents, and Manrope typography.
   Keep practical information readable on solid surfaces and navigation consistent.
 - Keep copy direct and useful. Avoid slogans and decorative filler. Put available
   features within easy reach; describe destinations with their location and short,

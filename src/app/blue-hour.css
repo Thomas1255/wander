@@ -37,28 +37,24 @@
   top: 0;
   z-index: 20;
   background: transparent;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 85%);
 }
 .site-header-overlay {
-  --header-label-background: color-mix(
-    in srgb,
-    var(--background) 90%,
-    transparent
-  );
   margin-bottom: calc(-1 * var(--header-height));
 }
-body:has(.cinematic-hero[data-navigation-tone="light"])
+body:has(.cinematic-hero[data-navigation-tone="dark"])
   .site-header-overlay[data-scrolled="false"] {
-  --foreground: var(--on-dark);
-  --primary: var(--on-dark);
-  --header-label-background: rgb(52 33 23 / 75%);
-  text-shadow: 0 1px 4px rgb(52 33 23 / 85%);
+  --foreground: #101820;
+  --primary: #101820;
+  --header-label-background: rgb(243 240 233 / 90%);
+  text-shadow: 0 1px 3px rgb(255 255 255 / 35%);
 }
-body:has(.cinematic-hero[data-navigation-tone="light"])
+body:has(.cinematic-hero[data-navigation-tone="dark"])
   .site-header-overlay[data-scrolled="false"]
   .preview-badge {
-  border-color: rgb(255 247 237 / 50%);
+  border-color: rgb(16 24 32 / 40%);
 }
-body:has(.cinematic-hero[data-navigation-tone="light"])
+body:has(.cinematic-hero[data-navigation-tone="dark"])
   .site-header-overlay[data-scrolled="false"]
   .mobile-menu-trigger:hover {
   color: var(--hero-foreground);
@@ -100,7 +96,7 @@ body:has(.cinematic-hero[data-navigation-tone="light"])
 }
 .header-inner > .preview-badge {
   margin-left: auto;
-  border-color: var(--border);
+  border-color: rgb(243 240 233 / 28%);
   color: var(--foreground);
   font-size: 0.75rem;
   padding: 6px 10px;
@@ -184,7 +180,7 @@ body:has(.cinematic-hero[data-navigation-tone="light"])
 .menu-overlay {
   position: fixed;
   inset: 0;
-  background: rgb(52 33 23 / 45%);
+  background: rgb(3 8 12 / 75%);
   backdrop-filter: blur(6px);
   z-index: 50;
   animation: veil-in var(--motion-quick);
@@ -198,7 +194,7 @@ body:has(.cinematic-hero[data-navigation-tone="light"])
   overflow-y: auto;
   background: var(--surface);
   padding: 28px;
-  box-shadow: -20px 0 80px rgb(52 33 23 / 16%);
+  box-shadow: -20px 0 80px rgb(0 0 0 / 25%);
   animation: menu-in var(--motion-slow);
 }
 .mobile-menu-top {
@@ -275,9 +271,10 @@ body:has(.cinematic-hero[data-navigation-tone="light"])
   z-index: -1;
   background: linear-gradient(
     180deg,
-    transparent 28%,
-    color-mix(in srgb, var(--background) 55%, transparent) 42%,
-    color-mix(in srgb, var(--background) 90%, transparent) 65%,
+    transparent 38%,
+    rgb(16 24 32 / 16%) 50%,
+    rgb(16 24 32 / 60%) 67%,
+    rgb(16 24 32 / 92%) 87%,
     var(--background) 100%
   );
 }
@@ -289,9 +286,10 @@ body:has(.cinematic-hero[data-navigation-tone="light"])
 }
 .hero-copy {
   max-width: 480px;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 65%);
 }
 .hero-location {
-  color: var(--foreground);
+  color: var(--primary);
   font-size: 0.875rem;
   font-weight: 650;
   line-height: 1.5;
@@ -361,7 +359,7 @@ body:has(.cinematic-hero[data-navigation-tone="light"])
   border: 1px solid var(--control-border);
   border-radius: 50%;
   color: var(--hero-foreground);
-  background: color-mix(in srgb, var(--background) 85%, transparent);
+  background: rgb(16 24 32 / 75%);
   cursor: pointer;
   transition:
     background var(--motion-quick),
@@ -710,6 +708,7 @@ body:has(.cinematic-hero[data-navigation-tone="light"])
 }
 .trip-image img {
   object-fit: cover;
+  filter: saturate(0.8);
 }
 .trip-card-featured .trip-image {
   min-height: 300px;
@@ -814,17 +813,17 @@ body:has(.cinematic-hero[data-navigation-tone="light"])
   margin-right: -5px;
   font-size: 0.55rem;
   font-weight: 700;
-  color: var(--on-dark);
+  color: var(--foreground);
   background: #594a40;
 }
 .avatar-1 {
-  background: #7e5039;
+  background: #3e5359;
 }
 .avatar-2 {
-  background: #815240;
+  background: #51465f;
 }
 .avatar-3 {
-  background: #73603c;
+  background: #48533f;
 }
 .preview-footnote {
   font-size: 0.75rem;
@@ -1033,9 +1032,10 @@ body:has(.cinematic-hero[data-navigation-tone="light"])
   .hero-fade {
     background: linear-gradient(
       180deg,
-      transparent 18%,
-      color-mix(in srgb, var(--background) 55%, transparent) 30%,
-      color-mix(in srgb, var(--background) 92%, transparent) 58%,
+      transparent 20%,
+      rgb(16 24 32 / 25%) 35%,
+      rgb(16 24 32 / 65%) 50%,
+      rgb(16 24 32 / 92%) 78%,
       var(--background) 100%
     );
   }

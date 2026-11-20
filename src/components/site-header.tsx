@@ -16,21 +16,11 @@ const links = [
 
 function subscribeToScroll(onChange: () => void) {
   window.addEventListener("scroll", onChange, { passive: true });
-  window.addEventListener("resize", onChange);
-  return () => {
-    window.removeEventListener("scroll", onChange);
-    window.removeEventListener("resize", onChange);
-  };
+  return () => window.removeEventListener("scroll", onChange);
 }
 
 function hasScrolled() {
-  const hero = document.querySelector<HTMLElement>(".cinematic-hero");
-  if (!hero) return window.scrollY > 16;
-
-  const headerHeight = document.getElementById("top")?.clientHeight ?? 0;
-  const fadePosition = window.innerWidth < 768 ? 0.3 : 0.32;
-  // Light ink over a dark photo switches to espresso within the peach fade.
-  return window.scrollY + headerHeight / 2 > hero.clientHeight * fadePosition;
+  return window.scrollY > 16;
 }
 
 export function SiteHeader() {

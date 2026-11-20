@@ -86,7 +86,6 @@ export function DestinationMenu() {
             dim={0}
             intro={false}
             showInfo={false}
-            theme="light"
             onReady={() => setReady(true)}
             onUnsupported={() => setUnsupported(true)}
             onActiveChange={(_, index) => setActiveIndex(index)}

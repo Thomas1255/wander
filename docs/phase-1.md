@@ -1,8 +1,5 @@
 # Phase 1: Blue Hour visual identity
 
-Current review: the owner approved a reversible Paprika palette trial. See the
-latest section below; earlier sections record the original Blue Hour work.
-
 ## Scope delivered
 
 The owner approved Blue Hour following three creative proposals. This phase adds
@@ -436,63 +433,3 @@ Formatting and whitespace checks, production build, and all 8 focused Infinite
 Menu browser checks pass. Desktop and phone screenshots were inspected, with no
 horizontal overflow. Preview `http://localhost:3000/#destinations` to review the
 frame; the next step remains visual review within Phase 1.
-
-## Paprika palette trial
-
-Applied the owner's selected warm palette across the existing Phase 1 screens:
-peach canvas, cream surfaces, espresso text, and tomato actions. The hero fades
-into peach instead of navy, while the upper photograph retains its brightness.
-Trip photography no longer has a saturation filter. The Infinite Menu, mobile
-dialog, empty state, loading shapes, avatars, and favicon use the same palette.
-Typography, composition, sample data, and available features are unchanged.
-No dependencies were added.
-
-Colors remain semantic CSS tokens rather than per-page overrides. A separate
-light-on-dark token keeps avatar labels and navigation over Greece readable.
-The root now uses the browser's light color scheme and the globe's light preset.
-The navbar stays sticky and fully transparent with no blur. Its cream text over
-Greece switches to espresso as it reaches the light fade, using the responsive
-hero and header heights. A visual check caught the initial switch happening too
-late; a new browser regression covers the corrected behavior in both viewports.
-The small preview badge retains a local backing for legibility over photographs.
-
-Changed files:
-
-- `src/app/globals.css`, `src/app/blue-hour.css`: semantic palette and photo,
-  control, avatar, menu, and loading treatments.
-- `src/app/layout.tsx`, `src/app/icon.svg`: light color scheme and favicon colors.
-- `src/components/site-header.tsx`, `src/components/destination-menu.tsx`:
-  responsive navigation ink and the globe's light preset.
-- `tests/e2e/visual-foundation.browser.spec.ts`: navigation-ink regression.
-- `AGENTS.md`, `README.md`, `docs/design-system.md`, `docs/development.md`, and
-  this report: current trial, tokens, and review guidance.
-
-Final `npm run verify` passed formatting, lint without warnings, strict type
-checking, all 3 unit tests, the production build, and all 54 Playwright browser/API
-checks without retries. Existing basic axe checks passed for all screens,
-alternate hero slides, and the mobile dialog. Responsive checks still cover 320,
-768, and 1440 pixels. Production captures were reviewed at 1440 and 390 pixels,
-including all three hero slides, scrolled navigation, the globe, trips, empty and
-loading states, and the open mobile menu. The production capture run recorded no
-browser errors or horizontal overflow on the collection screens.
-
-To review independently, run `npm run dev` and open:
-
-1. `http://localhost:3000/`: try Japan, Greece, and Iceland, then scroll down and
-   back up. Check the photo fade and transparent navbar.
-2. `http://localhost:3000/#destinations`: inspect the framed globe and select a
-   destination. Open its sample trip.
-3. `http://localhost:3000/trips`: inspect photo color, cream cards, tomato actions,
-   and espresso text. Use No trips and Loading to review the other states.
-4. Repeat at a phone width, open Menu, and navigate with the keyboard.
-
-`npm run verify` repeats the automated checks. This trial is saved in one separate
-checkpoint; `git revert <Paprika-commit-hash>` restores the previous palette and
-its guidance. The preceding baseline is `383d0e2`.
-
-This remains a sample-data visual preview awaiting the owner's approval.
-Physical-device, Safari, Firefox, and screen-reader review remain open.
-Existing slogans outside the previously revised sections remain separate copy
-work. A light fade reveals less of the lower photograph than the dark treatment;
-the owner should assess that tradeoff in the browser. The next step is visual
-review within Phase 1, before any Phase 2 work.

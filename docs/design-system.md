@@ -1,34 +1,29 @@
-# Wander design system
+# Blue Hour
 
-Wander's Phase 1 pairs cinematic photography with readable planning surfaces and
-Manrope typography. The owner approved a Paprika palette trial: peach and cream
-surfaces, espresso text, and tomato actions. This replaces Blue Hour's dark mineral
-colors for visual review while retaining the compositions and interactions.
-The trips page keeps destination, dates, and people easy to find.
+Approved visual direction for Wander's Phase 1. The interface pairs atmospheric
+photography with a stable, readable planning surface. The landing page creates
+anticipation; the trips page makes destination, dates, and people easy to find.
 
 ## Tokens
 
 `src/app/globals.css` is the source of truth. Tailwind semantic utilities and
-shadcn patterns share these values. Page compositions retain the existing
-`blue-hour.css` filename to keep the palette change small and easy to revert.
+shadcn patterns share these values; page compositions live in `blue-hour.css`.
 
 | Role                          | Token                  | Value                    |
 | ----------------------------- | ---------------------- | ------------------------ |
-| Canvas                        | `--background`         | `#fff0df`                |
-| Trip and empty-state surfaces | `--surface`            | `#fff8ee`                |
-| Raised surface / skeleton     | `--surface-raised`     | `#f4d2b4`                |
-| Main text                     | `--foreground`         | `#342117`                |
-| Supporting text               | `--muted-foreground`   | `#79533f`                |
-| Primary action                | `--primary`            | `#be4327`                |
-| Primary hover                 | `--primary-hover`      | `#a63420`                |
-| Text on primary               | `--primary-foreground` | `#fff7ed`                |
-| Hover surface                 | `--accent`             | `#f8d9bf`                |
-| Menu frame and subtle borders | `--border`             | `#cba187`                |
-| Outlined control borders      | `--control-border`     | `#976c56`                |
-| Keyboard focus                | `--focus-ring`         | `#ac3619`                |
-| Hero text                     | `--hero-foreground`    | `#342117`                |
-| Text on dark photos / avatars | `--on-dark`            | `#fff7ed`                |
-| Destructive action            | `--destructive`        | `#a92c1c`                |
+| Canvas                        | `--background`         | `#101820`                |
+| Trip and empty-state surfaces | `--surface`            | `#17222b`                |
+| Raised surface / skeleton     | `--surface-raised`     | `#26343f`                |
+| Main text                     | `--foreground`         | `#f3f0e9`                |
+| Supporting text               | `--muted-foreground`   | `#aebac2`                |
+| Primary action                | `--primary`            | `#e9bd9f`                |
+| Primary hover                 | `--primary-hover`      | `#f2cfb7`                |
+| Text on primary               | `--primary-foreground` | `#18212a`                |
+| Hover surface                 | `--accent`             | `#283943`                |
+| Decorative borders            | `--border`             | `#35434e`                |
+| Outlined control borders      | `--control-border`     | `#72838e`                |
+| Keyboard focus                | `--focus-ring`         | `#f4ce9c`                |
+| Hero text                     | `--hero-foreground`    | `#fffaf3`                |
 | Future destination accent     | `--destination-accent` | Defaults to `--primary`  |
 | Core radius                   | `--radius`             | `3px`                    |
 | Spacing unit                  | `--space-unit`         | `4px`                    |
@@ -63,15 +58,14 @@ preview-state links expose `aria-current`; destination anchor targets get an out
 - **Separation:** use whitespace and grouping instead of decorative divider lines.
   Section boundaries, footer, menu items, and collection labels do not use rules.
 - **Navigation:** a transparent header overlays the landing photograph, with
-  no full-width dimming layer. The night photograph of Greece uses cream navigation
-  text and a subtle text shadow; Tokyo and Iceland use espresso. Only header ink
-  changes, not the image or overall theme. The wordmark and desktop links
+  text shadows for legibility and no full-width dimming layer. Each slide declares
+  light or dark navigation text to suit its photograph; this changes only header
+  ink, not the image or overall theme. The wordmark and desktop links
   share a left-aligned row, with a full-label underline for the active page and a
   small preview label on the right. Sticky positioning keeps the header at the
   top while scrolling. It stays fully transparent, without a backdrop blur,
-  at every scroll position. Greece's navigation switches to espresso as the
-  header reaches the peach fade; the switch accounts for the different phone
-  and desktop fades and updates on resize. At the
+  at every scroll position. Light text and shadows support readability over
+  lower content; the photo-specific opening ink applies at the top. At the
   landing opening, a negative bottom margin preserves the photograph's overlap;
   trip routes keep the header's normal layout space. A shared responsive height
   also offsets anchor scrolling so linked destinations clear the header.
@@ -87,8 +81,8 @@ preview-state links expose `aria-current`; destination anchor targets get an out
   sample trip. Country labels double as segmented slide selectors; previous/next
   controls wrap, and horizontal touch swipes change slides. The upper photograph
   retains its original brightness, with no side scrim or color filter. A bottom
-  desktop fade begins at 28% of the photograph and ends in peach; espresso text sits
-  within that fade. Phone fades begin at 18% to keep descriptions
+  desktop fade begins below the upper third and ends in the canvas color; text sits lower
+  in that fade. Phone fades begin after the upper fifth to keep descriptions
   readable within a narrower crop. Desktop photography fills the width at roughly 2:1, bounded to
   680–960 pixels in height. Phone height stays at 560 pixels.
   Responsive crops keep landmarks in view. There is no carousel dependency.
@@ -101,7 +95,6 @@ preview-state links expose `aria-current`; destination anchor targets get an out
 - **Destinations:** React Bits' Infinite Menu repeats the three sample photos
   around a draggable sphere. Autoplay, intro spinning, grayscale, and dimming are
   disabled. A thin one-pixel border marks the interactive photo area.
-  The renderer uses its light setting to suit the peach canvas.
   Location, selected destination, and a sample-trip link sit below it
   on the canvas surface. Native destination buttons offer direct selection;
   the focused globe supports arrow keys and Enter. Only a short drag hint is

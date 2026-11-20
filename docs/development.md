@@ -78,9 +78,8 @@ The existing development-tooling audit findings are recorded in the phase report
 Pages stay server-rendered. The mobile menu uses client state and Radix's dialog
 behavior. The destination globe has a separate client boundary; its React Bits
 renderer is dynamically loaded near the viewport. Reduced motion and unavailable
-WebGL use a still picker with the same destination controls. The Next.js
-Tailwind/Turbopack setup is retained. The current Paprika palette trial shares
-semantic CSS variables across the existing cinematic compositions and components.
+WebGL use a still picker with the same destination controls. The Next.js Tailwind/Turbopack setup is retained; the approved Blue Hour
+visual rules are shared through CSS variables and component styles.
 
 ## Review documentation
 
