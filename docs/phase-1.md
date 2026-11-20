@@ -451,3 +451,50 @@ for this CSS adjustment.
 Preview `http://localhost:3000/#destinations` at desktop and phone widths to review
 the corners. The next step remains the owner's visual review within Phase 1;
 physical-device and non-Chromium review remain open.
+
+## Blue-to-sunset landing transition
+
+Added the owner's reference-inspired transition behind Destinations: deep blue
+flows through muted dusk pink into a warm peach horizon. The existing transparent
+globe and its 16-pixel frame reveal the same full-width background. Warm colors
+continue through the lower landing content and footer, with navy text and apricot
+actions. The opening carousel and trip screens retain their Blue Hour palette.
+
+The gradient follows the globe's responsive height. A local, licensed Mount Takao
+sunset photograph supplies restrained landscape detail using a CSS mask and
+soft-light blending; the color transition works without the photograph. It is
+decorative and does not change when selecting a destination. The original source,
+download URL, license, and photographer credit are recorded in `docs/assets.md`.
+No dependencies or destination theme engine were added.
+
+The sticky navbar stays transparent without blur and changes to dark ink over
+the warm part of the page. A noninteractive marker within the globe anchors that
+change to the responsive layout; scrolling back and changing routes restore the
+normal ink. Keyboard focus uses a two-tone outline across the gradient. Selected
+destination labels use dark ink and an underline rather than a pale accent that
+would lose contrast on peach.
+
+Changed files: `src/app/page.tsx`, `src/app/globals.css`, `src/app/blue-hour.css`,
+`src/components/destination-menu.tsx`, `src/components/site-header.tsx`,
+`src/components/site-footer.tsx`, and
+`tests/e2e/visual-foundation.browser.spec.ts`. Added
+`public/images/mount-takao-sunset.jpg` (1800 pixels wide, approximately 220 KB).
+Updated `AGENTS.md`, `docs/assets.md`, `docs/design-system.md`, and this review.
+
+Final `npm run verify` passed formatting, lint, strict TypeScript, all 3 unit
+tests, the production build, and all 54 Playwright browser/API checks without
+retries. The new regression covers navigation ink over the horizon, selected-label
+contrast, transparent navigation without blur, basic axe checks, and restoring
+normal colors on client navigation to trips. Production captures were checked at
+1440, 768, 390, and 320 pixels, including the lower landing content, footer, and
+reduced-motion still picker. No browser errors or horizontal overflow were
+recorded. Photograph blending and label contrast were adjusted after visual
+inspection, rather than relying solely on automated accessibility results.
+
+Manual review: run `npm run dev`, then open
+`http://localhost:3000/#destinations`. Scroll through the blue and peach areas,
+select destinations, tab to the globe, and follow View sample trip. Check the
+navbar while scrolling and after moving to `/trips`. Repeat at a phone width and
+with reduced motion enabled. The next step is the owner's visual review within
+Phase 1. This remains a sample-data preview; physical-device, Safari, Firefox,
+and screen-reader review remain open.

@@ -71,6 +71,7 @@ export function DestinationMenu() {
       data-ready={!animated || ready}
     >
       <div className="destination-menu-stage">
+        <span className="horizon-ink-boundary" aria-hidden="true" />
         {animated && (
           <InfiniteMenu
             ref={menuRef}

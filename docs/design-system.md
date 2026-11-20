@@ -34,6 +34,27 @@ shadcn patterns share these values; page compositions live in `blue-hour.css`.
 Color alone never communicates selection. Active navigation also has an underline;
 preview-state links expose `aria-current`; destination anchor targets get an outline.
 
+The landing page's Destinations section now transitions from Blue Hour into a
+peach sunset horizon, following the owner's reference. The gradient is aligned
+with the globe's responsive height and continues through the lower landing page
+and footer. The opening carousel and trip collection retain their Blue Hour
+palette. These additional semantic tokens live in `globals.css`:
+
+| Role                             | Token               | Value     |
+| -------------------------------- | ------------------- | --------- |
+| Sunset canvas                    | `--horizon-surface` | `#ffdfc6` |
+| Text on warm surfaces            | `--horizon-ink`     | `#152d3b` |
+| Supporting text on warm surfaces | `--horizon-muted`   | `#3c4650` |
+| Warm action                      | `--horizon-accent`  | `#f5b38c` |
+| Warm control outline             | `--horizon-control` | `#826d60` |
+| Warm keyboard focus              | `--horizon-focus`   | `#214b63` |
+
+The rounded globe frame remains transparent, revealing the sky transition and a
+lightly blended local Mount Takao sunset photograph. The photograph is decorative
+and stays the same when selecting a place. It does not introduce a destination
+theme engine. The selected place, controls, and trip action use dark ink on the
+warm canvas; the Destinations heading remains cream over blue.
+
 ## Typography and spacing
 
 - Manrope Variable is self-hosted through Fontsource, with system fallbacks and
@@ -73,6 +94,11 @@ preview-state links expose `aria-current`; destination anchor targets get an out
   phones handles focus trapping,
   Escape, and returning focus to its trigger. There are no unfinished profile,
   authentication, or trip-creation controls.
+  Over the warm part of the landing page, navigation switches to dark ink while
+  retaining its transparent background. A noninteractive marker within the globe
+  aligns this switch with the responsive composition; scrolling back or changing
+  routes restores normal ink. The globe uses a two-tone focus outline so keyboard
+  focus remains visible across its gradient background.
 - **Buttons:** the shadcn composition pattern supports native buttons or links via
   `asChild`. Primary, outline, and ghost treatments share tokens and focus rules.
   A Badge is used selectively for preview labels.

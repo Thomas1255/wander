@@ -42,6 +42,12 @@
 .site-header-overlay {
   margin-bottom: calc(-1 * var(--header-height));
 }
+.site-header[data-surface="warm"] {
+  --foreground: var(--horizon-ink);
+  --primary: #8b472b;
+  --header-label-background: rgb(255 223 198 / 92%);
+  text-shadow: 0 1px 4px rgb(255 223 198 / 65%);
+}
 body:has(.cinematic-hero[data-navigation-tone="dark"])
   .site-header-overlay[data-scrolled="false"] {
   --foreground: #101820;
@@ -378,6 +384,85 @@ body:has(.cinematic-hero[data-navigation-tone="dark"])
 .hero-next {
   right: 20px;
 }
+body:has(.landing-horizon) {
+  background: var(--horizon-surface);
+}
+.landing-horizon {
+  --horizon-stage-height: clamp(460px, 48vw, 620px);
+  --foreground: var(--horizon-ink);
+  --muted-foreground: var(--horizon-muted);
+  --primary: var(--horizon-accent);
+  --primary-hover: #fac7a5;
+  --primary-foreground: var(--horizon-ink);
+  --accent: #f5c7a7;
+  --control-border: var(--horizon-control);
+  --focus-ring: var(--horizon-focus);
+  position: relative;
+  isolation: isolate;
+  color: var(--foreground);
+  background:
+    linear-gradient(
+        180deg,
+        var(--background) 0%,
+        #163147 20%,
+        #64738a 40%,
+        #c39498 55%,
+        #f1b8a5 70%,
+        #ffd5b6 87%,
+        var(--horizon-surface) 100%
+      )
+      top / 100% calc(var(--horizon-stage-height) + 136px) no-repeat,
+    var(--horizon-surface);
+}
+.horizon-landscape {
+  position: absolute;
+  top: calc(var(--horizon-stage-height) * 0.6);
+  width: 100%;
+  height: 560px;
+  z-index: -1;
+  opacity: 0.65;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  mask-image: linear-gradient(
+    180deg,
+    transparent,
+    #000 35%,
+    #000 55%,
+    transparent
+  );
+}
+.horizon-landscape img {
+  object-fit: cover;
+  object-position: center 16%;
+}
+.landing-horizon .destinations-section > h2 {
+  color: var(--hero-foreground);
+}
+.landing-horizon .destination-menu-stage {
+  border-color: rgb(255 248 237 / 55%);
+}
+.landing-horizon .infinite-menu:focus-visible {
+  box-shadow:
+    inset 0 0 0 2px var(--horizon-ink),
+    inset 0 0 0 4px var(--hero-foreground);
+}
+.landing-horizon .destination-menu-controls button[aria-pressed="true"] {
+  color: var(--foreground);
+  font-weight: 700;
+}
+.horizon-ink-boundary {
+  position: absolute;
+  top: 34%;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+body:has(.landing-horizon) .site-footer {
+  --foreground: var(--horizon-ink);
+  --muted-foreground: var(--horizon-muted);
+  --focus-ring: var(--horizon-focus);
+  color: var(--foreground);
+}
 .destinations-section {
   padding-block: 58px 96px;
   scroll-margin-top: 24px;
@@ -467,6 +552,9 @@ body:has(.cinematic-hero[data-navigation-tone="dark"])
   font-size: 0.875rem;
 }
 @media (max-width: 540px) {
+  .landing-horizon {
+    --horizon-stage-height: 420px;
+  }
   .destination-menu-stage {
     height: 420px;
   }

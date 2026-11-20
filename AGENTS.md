@@ -28,6 +28,9 @@ trips with friends. The owner makes final product and architecture decisions.
 - The approved visual direction is Blue Hour: cinematic destination photography,
   deep mineral surfaces, warm white text, apricot accents, and Manrope typography.
   Keep practical information readable on solid surfaces and navigation consistent.
+- On the landing page, Destinations transitions from Blue Hour into a peach
+  sunset horizon behind the transparent globe, following the owner's reference.
+  Use dark ink on its warm lower surfaces; keep the navbar transparent.
 - Keep copy direct and useful. Avoid slogans and decorative filler. Put available
   features within easy reach; describe destinations with their location and short,
   concrete highlights.

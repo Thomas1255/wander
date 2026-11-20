@@ -187,6 +187,57 @@ test("navigation follows scrolling and stays transparent", async ({
   expect((await hero.boundingBox())?.y).toBe(0);
 });
 
+test("the landing horizon keeps controls readable and resets navigation on trip routes", async ({
+  page,
+  isMobile,
+}) => {
+  await page.goto("/#destinations");
+  const header = page.getByRole("banner");
+  const wordmark = header.getByRole("link", { name: "Wander home" });
+  await expect(header).toHaveAttribute("data-surface", "dark");
+  const openingInk = await wordmark.evaluate(
+    (element) => getComputedStyle(element).color,
+  );
+  await page.locator(".destination-menu-details").evaluate((element) =>
+    window.scrollTo({
+      top: window.scrollY + element.getBoundingClientRect().top - 110,
+      behavior: "instant",
+    }),
+  );
+  await expect(header).toHaveAttribute("data-surface", "warm");
+  const warmInk = await page
+    .locator(".destination-menu-details h3")
+    .evaluate((element) => getComputedStyle(element).color);
+  expect(warmInk).not.toBe(openingInk);
+  await page.mouse.move(0, 0);
+  await expect(
+    page.locator('.destination-menu-controls button[aria-pressed="true"]'),
+  ).toHaveCSS("color", warmInk);
+  await expect(wordmark).toHaveCSS("color", warmInk);
+  await expect(header).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  await expect(header).toHaveCSS("backdrop-filter", "none");
+  const accessibility = await new AxeBuilder({ page })
+    .include(".site-header")
+    .include(".destination-menu-details")
+    .include(".destination-menu-controls")
+    .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+    .analyze();
+  expect(accessibility.violations).toEqual([]);
+
+  if (isMobile) {
+    await header.getByRole("button", { name: "Open navigation" }).click();
+    await page
+      .getByRole("navigation", { name: "Mobile navigation" })
+      .getByRole("link", { name: "Your trips" })
+      .click();
+  } else {
+    await header.getByRole("link", { name: "Your trips" }).click();
+  }
+  await expect(page).toHaveURL(/\/trips$/);
+  await expect(header).toHaveAttribute("data-surface", "dark");
+  await expect(wordmark).toHaveCSS("color", openingInk);
+});
+
 test("carousel arrows wrap and direct selection updates the destination and trip", async ({
   page,
 }) => {

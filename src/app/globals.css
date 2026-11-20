@@ -48,6 +48,12 @@
   --control-border: #72838e;
   --focus-ring: #f4ce9c;
   --hero-foreground: #fffaf3;
+  --horizon-surface: #ffdfc6;
+  --horizon-ink: #152d3b;
+  --horizon-muted: #3c4650;
+  --horizon-accent: #f5b38c;
+  --horizon-control: #826d60;
+  --horizon-focus: #214b63;
   --destructive: #f09898;
   --destination-accent: var(--primary);
   --radius: 3px;

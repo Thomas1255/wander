@@ -16,11 +16,22 @@ const links = [
 
 function subscribeToScroll(onChange: () => void) {
   window.addEventListener("scroll", onChange, { passive: true });
-  return () => window.removeEventListener("scroll", onChange);
+  window.addEventListener("resize", onChange);
+  return () => {
+    window.removeEventListener("scroll", onChange);
+    window.removeEventListener("resize", onChange);
+  };
 }
 
 function hasScrolled() {
   return window.scrollY > 16;
+}
+
+function isOverWarmSurface() {
+  const boundary = document.querySelector(".horizon-ink-boundary");
+  if (!boundary) return false;
+  const header = document.getElementById("top");
+  return boundary.getBoundingClientRect().top < (header?.clientHeight ?? 0) / 2;
 }
 
 export function SiteHeader() {
@@ -31,6 +42,11 @@ export function SiteHeader() {
     hasScrolled,
     () => false,
   );
+  const warmSurface = useSyncExternalStore(
+    subscribeToScroll,
+    isOverWarmSurface,
+    () => false,
+  );
 
   return (
     <header
@@ -38,6 +54,7 @@ export function SiteHeader() {
         pathname === "/" ? "site-header site-header-overlay" : "site-header"
       }
       data-scrolled={scrolled}
+      data-surface={warmSurface ? "warm" : "dark"}
       id="top"
     >
       <div className="page-container header-inner">
