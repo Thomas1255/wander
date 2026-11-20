@@ -394,7 +394,7 @@ body:has(.cinematic-hero[data-navigation-tone="dark"])
   position: relative;
   height: clamp(460px, 48vw, 620px);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 16px;
   overflow: hidden;
 }
 .destination-menu-still {

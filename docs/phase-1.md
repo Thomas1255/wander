@@ -433,3 +433,21 @@ Formatting and whitespace checks, production build, and all 8 focused Infinite
 Menu browser checks pass. Desktop and phone screenshots were inspected, with no
 horizontal overflow. Preview `http://localhost:3000/#destinations` to review the
 frame; the next step remains visual review within Phase 1.
+
+## Rounded Infinite Menu frame
+
+Increased the outer menu frame's corner radius from 3 to 16 pixels. Its existing
+overflow clipping keeps the globe and still-image fallback inside the curve.
+The radius is local to the frame; the shared component radius remains 3 pixels.
+Changed `src/app/blue-hour.css`, `docs/design-system.md`, and this report.
+
+Formatting checks, the production build, and all 10 focused destination-menu
+browser checks pass. Desktop and phone captures were visually inspected; both
+use the 16-pixel frame without horizontal overflow. Existing checks cover globe
+selection, keyboard operation, dragging, vertical touch scrolling, and reduced
+motion / unavailable-WebGL fallbacks. No new tests or dependencies were needed
+for this CSS adjustment.
+
+Preview `http://localhost:3000/#destinations` at desktop and phone widths to review
+the corners. The next step remains the owner's visual review within Phase 1;
+physical-device and non-Chromium review remain open.
