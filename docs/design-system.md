@@ -42,6 +42,7 @@ palette. These additional semantic tokens live in `globals.css`:
 
 | Role                             | Token               | Value     |
 | -------------------------------- | ------------------- | --------- |
+| Hero / sky transition            | `--horizon-entry`   | `#0c2942` |
 | Sunset canvas                    | `--horizon-surface` | `#ffdfc6` |
 | Text on warm surfaces            | `--horizon-ink`     | `#152d3b` |
 | Supporting text on warm surfaces | `--horizon-muted`   | `#3c4650` |
@@ -57,6 +58,11 @@ shadow treatment. The photograph outside the frame is decorative and stays the
 same when selecting a place. There is no destination theme engine. The selected
 place, controls, and trip action use dark ink on the warm canvas; the Destinations
 heading remains cream over blue.
+
+The hero fade and the start of the Destinations gradient share `--horizon-entry`.
+This avoids a charcoal band between the photograph and the blue sky. The sky's
+opacity rises gradually over its upper 24%, preserving a continuous transition
+on desktop and phones without changing layout dimensions or spacing.
 
 The surrounding sky is a decorative generated illustration, documented in
 `docs/assets.md`. Its clouds, peach light, and layered mountains remain visible
@@ -120,7 +126,7 @@ unchanged. Desktop frame height remains 460–620 pixels and the phone frame is
   sample trip. Country labels double as segmented slide selectors; previous/next
   controls wrap, and horizontal touch swipes change slides. The upper photograph
   retains its original brightness, with no side scrim or color filter. A bottom
-  desktop fade begins below the upper third and ends in the canvas color; text sits lower
+  desktop fade begins below the upper third and ends in the shared sky-entry blue; text sits lower
   in that fade. Phone fades begin after the upper fifth to keep descriptions
   readable within a narrower crop. Desktop photography fills the width at roughly 2:1, bounded to
   680–960 pixels in height. Phone height stays at 560 pixels.

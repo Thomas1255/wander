@@ -278,10 +278,10 @@ body:has(.cinematic-hero[data-navigation-tone="dark"])
   background: linear-gradient(
     180deg,
     transparent 38%,
-    rgb(16 24 32 / 16%) 50%,
-    rgb(16 24 32 / 60%) 67%,
-    rgb(16 24 32 / 92%) 87%,
-    var(--background) 100%
+    color-mix(in srgb, var(--horizon-entry) 16%, transparent) 50%,
+    color-mix(in srgb, var(--horizon-entry) 60%, transparent) 67%,
+    color-mix(in srgb, var(--horizon-entry) 92%, transparent) 87%,
+    var(--horizon-entry) 100%
   );
 }
 .hero-content {
@@ -403,7 +403,7 @@ body:has(.landing-horizon) {
   background:
     linear-gradient(
         180deg,
-        var(--background) 0%,
+        var(--horizon-entry) 0%,
         #163147 20%,
         #64738a 40%,
         #c39498 55%,
@@ -423,8 +423,10 @@ body:has(.landing-horizon) {
   pointer-events: none;
   mask-image: linear-gradient(
     180deg,
-    transparent,
-    #000 10%,
+    transparent 0%,
+    rgb(0 0 0 / 20%) 5%,
+    rgb(0 0 0 / 70%) 14%,
+    #000 24%,
     #000 91%,
     transparent
   );
@@ -1077,10 +1079,10 @@ body:has(.landing-horizon) .site-footer {
     background: linear-gradient(
       180deg,
       transparent 20%,
-      rgb(16 24 32 / 25%) 35%,
-      rgb(16 24 32 / 65%) 50%,
-      rgb(16 24 32 / 92%) 78%,
-      var(--background) 100%
+      color-mix(in srgb, var(--horizon-entry) 25%, transparent) 35%,
+      color-mix(in srgb, var(--horizon-entry) 65%, transparent) 50%,
+      color-mix(in srgb, var(--horizon-entry) 92%, transparent) 78%,
+      var(--horizon-entry) 100%
     );
   }
   .hero-image-tokyo {

@@ -579,3 +579,25 @@ Run npm run dev, open http://localhost:3000/, and scroll to the bottom. Confirm
 the filler is gone and Photography expands to the source links. Repeat at a phone
 width. The next step remains visual review within Phase 1; physical-device and
 non-Chromium checks remain open.
+
+## Blended hero-to-sky transition
+
+The hero previously faded to charcoal while Destinations began in blue, creating
+a visible dark band. Both now meet at the same navy transition token. The sky
+illustration fades in gradually over its upper 24%, and the phone hero uses the
+same transition color. Only the fade colors and sky mask changed; menu and photo
+dimensions, spacing, typography, and navigation sizing remain intact.
+
+Changed src/app/globals.css, src/app/blue-hour.css, docs/design-system.md, and
+this review. No dependencies, framework code, or tests were added. Formatting
+and the production build pass. All 10 focused Playwright checks pass, covering
+hero proportions, carousel selection and keyboard controls, alternate-slide
+accessibility, and landing accessibility on desktop and phone emulation.
+Production captures of Japan, Greece, and Iceland were visually reviewed at
+1900 pixels, along with phone captures at 390 pixels. No browser errors or
+horizontal overflow were recorded.
+
+Run npm run dev and open http://localhost:3000/. Select each destination and
+scroll through the photograph's lower fade into Destinations. Repeat at a phone
+width. The next step is visual review within Phase 1; physical-device and
+non-Chromium review remain open.
