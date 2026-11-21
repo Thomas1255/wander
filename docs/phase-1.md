@@ -620,3 +620,26 @@ at a 390-pixel viewport. No new dependencies or tests were needed.
 Run npm run dev and open http://localhost:3000/#destinations to review the upper
 edge at desktop and phone widths. The next step remains visual review within
 Phase 1; physical-device and non-Chromium checks remain open.
+
+## Removed peach line from the menu border
+
+The gradient's default repeat tiled its peach bottom into the top border, so
+changing border opacity alone did not remove the line. The menu background now
+uses the border box as its origin and does not repeat. Every border edge uses
+#667f8c, the muted blue-gray sampled from the owner's reference. Menu size,
+rounded corners, photo scaling, spacing, and the gradient colors are preserved.
+
+Changed src/app/blue-hour.css, docs/design-system.md, this report, and
+tests/e2e/visual-foundation.browser.spec.ts. The new pixel regression failed on
+the previous build in desktop and high-density phone emulation, detecting the
+peach stripe; it passes after the fix. No dependencies were added.
+
+Final npm run verify passed formatting, lint, strict TypeScript, all 3 unit tests,
+the production build, and all 56 browser/API checks without retries. Desktop and
+phone production captures were visually checked. The frame remains 1296 × 620
+at 1440 pixels and 342 × 420 at 390 pixels, with no browser errors or horizontal
+overflow in the capture run.
+
+Run npm run dev and open http://localhost:3000/#destinations to inspect the
+uniform border and confirm the peach line is gone. The next step remains visual
+review within Phase 1; physical-device and non-Chromium review remain open.

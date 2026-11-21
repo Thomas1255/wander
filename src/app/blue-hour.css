@@ -439,8 +439,7 @@ body:has(.landing-horizon) {
   color: var(--hero-foreground);
 }
 .landing-horizon .destination-menu-stage {
-  border-color: rgb(255 248 237 / 32%);
-  border-top-color: rgb(151 180 202 / 20%);
+  border-color: #667f8c;
 }
 .landing-horizon .infinite-menu:focus-visible {
   box-shadow:
@@ -495,6 +494,9 @@ body:has(.landing-horizon) .site-footer {
       #c69a9c 76%,
       #f4bba9 100%
     );
+  /* Keep the peach gradient tail from repeating into the top border. */
+  background-origin: border-box;
+  background-repeat: no-repeat;
   overflow: hidden;
 }
 .destination-menu-stage .infinite-menu__canvas {

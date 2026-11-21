@@ -441,6 +441,53 @@ test("destination menu selects a place and opens its corresponding sample trip",
   expect(target.y).toBeGreaterThanOrEqual(header.y + header.height);
 });
 
+test("the menu frame has no peach stripe across its blue upper edge", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/#destinations");
+  const frame = page.locator(".destination-menu-stage");
+  const width = await frame.evaluate((element) => element.clientWidth + 2);
+  const capture = await frame.screenshot();
+  const warmPixelFraction = await page.evaluate(
+    async ({ base64, width }) => {
+      const blob = await fetch(`data:image/png;base64,${base64}`).then(
+        (response) => response.blob(),
+      );
+      const bitmap = await createImageBitmap(blob);
+      const sample = document.createElement("canvas");
+      sample.width = bitmap.width;
+      sample.height = Math.ceil((3 * bitmap.width) / width);
+      const context = sample.getContext("2d");
+      if (!context) throw new Error("Frame inspection requires a 2D canvas.");
+      context.drawImage(bitmap, 0, 0);
+      const { data } = context.getImageData(0, 0, sample.width, sample.height);
+      bitmap.close();
+      let warm = 0;
+      let total = 0;
+      // Inspect the straight upper edge, excluding the rounded corners.
+      for (let y = 0; y < sample.height; y += 1) {
+        for (
+          let x = Math.ceil(sample.width * 0.1);
+          x < sample.width * 0.9;
+          x += 1
+        ) {
+          const offset = (y * sample.width + x) * 4;
+          if (
+            (data[offset] ?? 0) > 145 &&
+            (data[offset] ?? 0) > (data[offset + 2] ?? 0) + 12
+          )
+            warm += 1;
+          total += 1;
+        }
+      }
+      return warm / total;
+    },
+    { base64: capture.toString("base64"), width },
+  );
+  expect(warmPixelFraction).toBeLessThan(0.01);
+});
+
 test("destination globe loads, supports direct selection, and works with the keyboard", async ({
   page,
 }) => {
