@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import type { InfiniteMenuHandle } from "@/components/react-bits/infinite-menu";
-import { destinations } from "@/lib/demo-trips";
+import { destinations, type Destination } from "@/lib/demo-trips";
 
 const InfiniteMenu = dynamic(() => import("./react-bits/infinite-menu"), {
   ssr: false,
@@ -17,7 +17,7 @@ const InfiniteMenu = dynamic(() => import("./react-bits/infinite-menu"), {
 const items = destinations.map((destination) => ({
   image: destination.image,
   title: destination.name,
-  description: destination.locationLabel,
+  description: destination.highlights,
   link: `/trips#${destination.id}`,
 }));
 
@@ -29,6 +29,40 @@ function subscribeToMotion(onChange: () => void) {
 
 function allowsMotion() {
   return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function DestinationDetails({
+  destination,
+  moving = false,
+}: {
+  destination: Destination;
+  moving?: boolean;
+}) {
+  return (
+    <div
+      className="destination-menu-details"
+      data-moving={moving}
+      inert={moving}
+    >
+      <div
+        className="destination-menu-title"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <p>{destination.locationLabel}</p>
+        <h3>{destination.name}</h3>
+      </div>
+      <p className="destination-menu-description">{destination.highlights}</p>
+      <Button asChild className="destination-menu-action">
+        <Link
+          href={`/trips#${destination.id}`}
+          aria-label={`See ${destination.name} sample trip`}
+        >
+          View sample trip
+        </Link>
+      </Button>
+    </div>
+  );
 }
 
 export function DestinationMenu() {
@@ -78,15 +112,21 @@ export function DestinationMenu() {
             items={items}
             count={80}
             roundness={0.1}
-            zoom={1.05}
-            pullBack={0.35}
+            zoom={1.6}
+            pullBack={1.2}
             stretch={0.15}
             inertia={0.35}
             autoplay={0}
             grayscale={false}
             dim={0}
             intro={false}
-            showInfo={false}
+            showInfo
+            renderInfo={(_, index, moving) => (
+              <DestinationDetails
+                destination={destinations[index] ?? destinations[0]}
+                moving={moving}
+              />
+            )}
             onReady={() => setReady(true)}
             onUnsupported={() => setUnsupported(true)}
             onActiveChange={(_, index) => setActiveIndex(index)}
@@ -97,29 +137,18 @@ export function DestinationMenu() {
           />
         )}
         {(!animated || !ready) && (
-          <div className="destination-menu-still">
-            <Image
-              src={destination.image}
-              alt={destination.imageAlt}
-              fill
-              sizes="(max-width: 767px) 80vw, 380px"
-            />
+          <div className="destination-menu-fallback" data-layout="stacked">
+            <div className="destination-menu-still">
+              <Image
+                src={destination.image}
+                alt={destination.imageAlt}
+                fill
+                sizes="(max-width: 767px) 80vw, 380px"
+              />
+            </div>
+            <DestinationDetails destination={destination} />
           </div>
         )}
-      </div>
-      <div className="destination-menu-details">
-        <div aria-live="polite" aria-atomic="true">
-          <h3>{destination.name}</h3>
-          <p>{destination.locationLabel}</p>
-        </div>
-        <Button asChild>
-          <Link
-            href={`/trips#${destination.id}`}
-            aria-label={`See ${destination.name} sample trip`}
-          >
-            View sample trip
-          </Link>
-        </Button>
       </div>
       <div className="destination-menu-controls">
         <div role="group" aria-label="Choose a destination to explore">

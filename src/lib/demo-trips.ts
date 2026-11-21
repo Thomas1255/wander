@@ -3,6 +3,7 @@ export type Destination = {
   id: string;
   name: string;
   locationLabel: string;
+  highlights: string;
   image: string;
   imageAlt: string;
 };
@@ -21,6 +22,7 @@ export const destinations = [
     id: "tokyo",
     name: "Tokyo",
     locationLabel: "Japan",
+    highlights: "Tokyo Tower, Senso-ji, and Shinjuku after dark.",
     image: "/images/tokyo.jpg",
     imageAlt: "Tokyo Tower glowing above the city at dusk",
   },
@@ -28,6 +30,7 @@ export const destinations = [
     id: "santorini",
     name: "Santorini",
     locationLabel: "Greece",
+    highlights: "Caldera views, volcanic beaches, and sunsets in Oia.",
     image: "/images/santorini.jpg",
     imageAlt: "The lit hillside of Oia looking out over the Aegean at night",
   },
@@ -35,6 +38,7 @@ export const destinations = [
     id: "iceland",
     name: "Iceland",
     locationLabel: "South Coast",
+    highlights: "Waterfalls, black-sand beaches, and glacier lagoons.",
     image: "/images/iceland.jpg",
     imageAlt: "A waterfall descending through dark Icelandic cliffs",
   },

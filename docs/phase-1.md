@@ -643,3 +643,54 @@ overflow in the capture run.
 Run npm run dev and open http://localhost:3000/#destinations to inspect the
 uniform border and confirm the peach line is gone. The next step remains visual
 review within Phase 1; physical-device and non-Chromium review remain open.
+
+## Infinite Menu focus zoom and destination details
+
+Matched the behavior shown in the owner's 11.9-second video: the globe pulls back
+while dragging, snaps toward a card on release, zooms into that centered photo,
+and reveals concise details. Keyboard arrows and the native destination buttons
+use the same movement-to-focus transition. The frame dimensions, border, backdrop,
+photography, manual navigation, and lack of autoplay remain intact. The requested
+focus zoom changes photo magnification inside the existing frame.
+
+The focused state shows the place, location, factual highlights, and a working
+View sample trip link. Details sit beside the photo on desktop and in a compact
+bottom panel on narrow screens. Cream backings keep the navy text legible across
+the existing gradient and photographs. Details fade out during movement and are
+inert, preventing hidden links from receiving keyboard focus. The still picker
+for reduced motion and unavailable/lost WebGL retains the same details and links
+without camera animation.
+
+Reused the existing React Bits camera, focus state, information renderer, and
+responsive layout. Set focus zoom to 1.6 and pull-back strength to 1.2. The text
+layout follows the actual camera distance, and keyboard/direct-selection movement
+also contributes to camera pull-back. Factual destination highlights now live in
+the shared fixtures and are reused by the opening carousel. No app dependencies,
+backend resources, or future-phase features were added.
+
+Changed src/components/destination-menu.tsx,
+src/components/react-bits/infinite-menu.tsx, src/app/blue-hour.css,
+src/lib/demo-trips.ts, src/components/destination-carousel.tsx, and
+tests/e2e/visual-foundation.browser.spec.ts. Updated AGENTS.md and the design,
+asset, development, and phase notes.
+
+Final npm run verify passed formatting, lint, strict TypeScript, all 3 unit tests,
+the production build, and all 58 Playwright browser/API checks without retries.
+The new zoom regression measures the camera-driven tile size during a real drag,
+checks hidden/inert details during movement, verifies zoom and matching highlights
+after settling, and follows the correct sample-trip link. Existing tests continue
+to cover keyboard movement, touch scrolling, WebGL and reduced-motion fallbacks,
+border pixels, responsive widths, and basic axe checks. The navigation-ink test
+now scrolls to the actual warm-color marker instead of the relocated text panel.
+
+Production views were inspected at 1440, 768, 390, and 320 pixels in focused and
+zoomed-out states, including all destinations and the still picker. The capture
+run recorded no browser errors or horizontal overflow. The frame stays 1296 × 620
+at 1440px, 342 × 420 at 390px, and 272 × 420 at 320px. Physical-device, Safari,
+Firefox, and screen-reader review remain open.
+
+To review, run npm run dev and open http://localhost:3000/#destinations. Drag the
+globe, release it, and watch the centered photo zoom forward as its details appear.
+Try the destination buttons, arrow keys on the focused globe, and View sample trip.
+Repeat at a phone width and with reduced motion enabled. The next step remains
+the owner's visual and interaction review within Phase 1.

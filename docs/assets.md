@@ -47,6 +47,10 @@ Local changes strengthen tuple/index types for strict TypeScript, add direct
 selection and renderer lifecycle callbacks, preserve vertical touch scrolling,
 handle lost WebGL, and prevent interpolation of the tile's atlas ID. Wander's
 wrapper supplies reduced-motion/no-WebGL fallback, sample links, and controls.
+The video-inspired settle view reuses the renderer's camera and custom-info
+support. Local adjustments measure the current projected tile size for text
+placement, expose the responsive layout to the info wrapper, and pull back for
+keyboard/direct-selection movement as well as pointer dragging.
 
 ## Reproducible photo sources
 

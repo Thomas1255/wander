@@ -594,7 +594,7 @@ const InfiniteMenu = ({
     };
 
     const measure = () => {
-      const rest = restDistance();
+      const rest = state.camera || restDistance();
       const radius =
         (tileRadius() / ((rest - RADIUS) * Math.tan(FOV / 2))) *
         (state.height / 2);
@@ -792,7 +792,11 @@ const InfiniteMenu = ({
       if (!moving) report();
 
       const rest = restDistance();
-      const pullAmount = clamp(drag.active ? 1 : state.speed / 2.2, 0, 1);
+      const pullAmount = clamp(
+        drag.active ? 1 : Math.max(state.speed / 2.2, settledAngle / 0.45),
+        0,
+        1,
+      );
       const target =
         rest +
         s.pullBack * pullAmount * RADIUS * 1.25 +
@@ -1142,7 +1146,11 @@ const InfiniteMenu = ({
       {showInfo &&
         current &&
         (renderInfo ? (
-          <div className="infinite-menu__custom">
+          <div
+            className="infinite-menu__custom"
+            data-moving={moving}
+            data-layout={layout}
+          >
             {renderInfo(current, active % items.length, moving)}
           </div>
         ) : (

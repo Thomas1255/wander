@@ -14,21 +14,18 @@ const slides = [
     country: "Japan",
     navigationTone: "dark",
     location: "Tokyo",
-    description: "Tokyo Tower, Senso-ji, and Shinjuku after dark.",
   },
   {
     destination: destinations[1],
     country: "Greece",
     navigationTone: "light",
     location: "Santorini",
-    description: "Caldera views, volcanic beaches, and sunsets in Oia.",
   },
   {
     destination: destinations[2],
     country: "Iceland",
     navigationTone: "dark",
     location: "South Coast",
-    description: "Waterfalls, black-sand beaches, and glacier lagoons.",
   },
 ] as const;
 
@@ -113,7 +110,7 @@ export function DestinationCarousel() {
         >
           <p className="hero-location">{slide.location}</p>
           <h1>{slide.country}</h1>
-          <p className="hero-description">{slide.description}</p>
+          <p className="hero-description">{slide.destination.highlights}</p>
           <Button asChild className="hero-action">
             <Link href={`/trips#${slide.destination.id}`}>
               View sample trip

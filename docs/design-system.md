@@ -147,13 +147,24 @@ unchanged. Desktop frame height remains 460–620 pixels and the phone frame is
   around a draggable sphere. Autoplay, intro spinning, grayscale, and dimming are
   disabled. A thin one-pixel border with 16-pixel corners marks the interactive
   photo area and clips its contents to the same curve, including the still picker.
-  Location, selected destination, and a sample-trip link sit below it
-  on the canvas surface. Native destination buttons offer direct selection;
-  the focused globe supports arrow keys and Enter. Only a short drag hint is
-  shown. Reduced motion or unavailable/lost WebGL uses a still image picker with
-  the same controls and links. The renderer loads near the viewport and stops
+  Following the owner's video, dragging pulls the globe back; as a card settles,
+  the camera zooms toward it and reveals the destination, location, short factual
+  highlights, and sample-trip action inside the frame. Desktop details sit beside
+  the photo; narrow layouts use a compact bottom panel. Cream text backings keep
+  navy type readable across the blue/peach background and changing photographs.
+  During movement, details fade out and become inert so their hidden link cannot
+  receive keyboard focus. Arrow keys and direct destination selection use the
+  same settle/zoom behavior. Native destination buttons and a short drag hint
+  remain below the frame; Enter on the focused globe opens its sample trip.
+  Reduced motion or unavailable/lost WebGL uses a still image picker with the
+  same details and links, without zoom animation. The renderer loads near the viewport and stops
   rendering while offscreen. The selected trip's anchor highlight explains the
   transition to the sample collection.
+  The frame keeps its existing 460–620-pixel desktop / 420-pixel phone height.
+  The existing renderer's focus zoom is 1.6 and pull-back strength is 1.2, with
+  80 repeated photo tiles. Text positions follow the current projected tile size
+  as the camera moves. The destination highlights live in the shared fixtures
+  and are also used by the opening carousel, avoiding two copies of the text.
 - **Empty collection:** a real route state with a photograph, a short invitation,
   and working links to sample trips and destination inspiration. It does not
   pretend that creating a trip is implemented.

@@ -203,9 +203,9 @@ test("the landing horizon keeps controls readable and resets navigation on trip 
   const openingInk = await wordmark.evaluate(
     (element) => getComputedStyle(element).color,
   );
-  await page.locator(".destination-menu-details").evaluate((element) =>
+  await page.locator(".horizon-ink-boundary").evaluate((element) =>
     window.scrollTo({
-      top: window.scrollY + element.getBoundingClientRect().top - 110,
+      top: window.scrollY + element.getBoundingClientRect().top - 10,
       behavior: "instant",
     }),
   );
@@ -579,6 +579,68 @@ test("destination globe loads, supports direct selection, and works with the key
   expect(results.violations).toEqual([]);
 });
 
+test("the globe pulls back during dragging and zooms to matching details on settle", async ({
+  page,
+}) => {
+  await page.goto("/#destinations");
+  const menu = page.locator(".destination-menu");
+  await expect(menu).toHaveAttribute("data-presentation", "globe");
+  await expect(menu).toHaveAttribute("data-ready", "true");
+  const globe = page.getByRole("group", {
+    name: "Destination globe",
+    exact: true,
+  });
+  const canvas = globe.locator("canvas");
+  await canvas.scrollIntoViewIfNeeded();
+  const box = await canvas.boundingBox();
+  if (!box) throw new Error("The globe must be visible.");
+  const tileRadius = () =>
+    globe.evaluate((element) =>
+      parseFloat(
+        getComputedStyle(element).getPropertyValue("--infinite-menu-tile"),
+      ),
+    );
+  await expect(globe).toHaveAttribute("data-moving", "false");
+  await expect
+    .poll(tileRadius)
+    .toBeGreaterThan(Math.min(box.width, box.height) * 0.33);
+  const focusedRadius = await tileRadius();
+  const details = globe.locator(".destination-menu-details");
+  await expect(details).toHaveCSS("opacity", "1");
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(
+    box.x + box.width / 2 - 85,
+    box.y + box.height / 2 + 10,
+    { steps: 8 },
+  );
+  await expect(globe).toHaveAttribute("data-moving", "true");
+  await expect(details).toHaveAttribute("inert", "");
+  await expect(details).toHaveCSS("opacity", "0");
+  await expect.poll(tileRadius).toBeLessThan(focusedRadius * 0.65);
+  await page.mouse.up();
+  await expect(globe).toHaveAttribute("data-moving", "false");
+  await expect.poll(tileRadius).toBeGreaterThan(focusedRadius * 0.9);
+  await expect(details).not.toHaveAttribute("inert", "");
+  await expect(details).toHaveCSS("opacity", "1");
+  const selected = await menu
+    .locator('button[aria-pressed="true"]')
+    .textContent();
+  await expect(details.getByRole("heading", { level: 3 })).toHaveText(
+    selected ?? "",
+  );
+  await expect(details.locator(".destination-menu-description")).toBeVisible();
+  await expect(page).toHaveURL(/\/#destinations$/);
+
+  await menu.getByRole("button", { name: "Iceland", exact: true }).click();
+  await expect(details.getByRole("heading", { name: "Iceland" })).toBeVisible();
+  await expect(
+    details.getByText("Waterfalls, black-sand beaches, and glacier lagoons."),
+  ).toBeVisible();
+  await details.getByRole("link", { name: "See Iceland sample trip" }).click();
+  await expect(page).toHaveURL(/\/trips#iceland$/);
+});
+
 test("destination globe responds to dragging without blocking vertical touch scrolling", async ({
   page,
   context,
@@ -644,6 +706,9 @@ test("reduced motion uses a still destination picker with working trip links", a
   await expect(section.getByRole("heading", { level: 3 })).toHaveText(
     "Iceland",
   );
+  await expect(
+    section.getByText("Waterfalls, black-sand beaches, and glacier lagoons."),
+  ).toBeVisible();
   await section.getByRole("link", { name: "See Iceland sample trip" }).click();
   await expect(page).toHaveURL(/\/trips#iceland$/);
 });

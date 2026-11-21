@@ -35,6 +35,10 @@ trips with friends. The owner makes final product and architecture decisions.
 - Treat visual references as guidance for colors, atmosphere, and surface design.
   Preserve existing menu, photo, navigation, and layout scaling unless the owner
   explicitly asks to change those dimensions.
+- The Infinite Menu follows the owner's video: pull back during interaction,
+  zoom toward the centered card on settling, and reveal concise destination
+  details inside the frame. Keep the frame dimensions and background intact;
+  reduced motion uses a still picker with the same details and sample-trip links.
 - Keep copy direct and useful. Avoid slogans and decorative filler. Put available
   features within easy reach; describe destinations with their location and short,
   concrete highlights.
